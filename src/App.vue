@@ -13,7 +13,15 @@
 		methods:{
 			appInt(){
 			switchEnvironment('uat')
-			}
+                this.setColor();
+			},
+            setColor() {
+                let storge = window.localStorage
+                let firstColor = storge.getItem('firstColor') || '#1E77CB'
+                let secondColor = storge.getItem('secondColor') || '#1E77CB'
+                document.getElementsByTagName('body')[0].style.setProperty('--first-color', firstColor)
+                document.getElementsByTagName('body')[0].style.setProperty('--second-color', secondColor)
+            },
 		},
 		created() {
 			this.appInt()
@@ -21,12 +29,14 @@
 	}
 </script>
 <style lang="scss">
-#app {
+    @import "./assets/style/mixin";
+
+    #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: $theme-color;
 }
 
 #nav {
