@@ -13,6 +13,7 @@ import zlLoading from '@/components/extends/loading'
 
 Vue.use(zlLoading)
 import zlDialog from '@/components/extends/zlDialog'
+import './plugins/element.js'
 
 Vue.use(zlDialog)
 Vue.config.productionTip = false

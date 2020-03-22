@@ -27,6 +27,7 @@
 				second: localStorage.getItem('secondColor'),
 			}
 		},
+
 		computed: {
 			...mapState({
 				name: state => state.main.name
@@ -52,7 +53,7 @@
 			getData() {
 				AxiosUtil.post({
 					data: {
-						access_code: '861b09e8-9120-4cf5-9298-2bf29480968d'
+						access_code: '5027ec80-1eb8-47a9-9933-0985a8ba78bb'
 					},
 					url: 'querySaleRecordForReturn'
 				}).then(res => {

@@ -20,7 +20,6 @@ class AxiosUtil {
     const params = this.chooseBaseUrl(options)
     return new Promise((resolve, reject) => {
       axios(params).then(response => {
-        const end_time = new Date().getTime()
         let mdType = 'failed'
         if (response.status === 200) {
           let res = response.data
@@ -30,11 +29,8 @@ class AxiosUtil {
           reject(response.data)
           mdType = 'failed'
         }
-        this.buried(apiDoors[options.url], end_time - start_time, mdType)
       }).catch(err => {
         reject(err)
-        const end_time = new Date().getTime()
-        this.buried(apiDoors[options.url], end_time - start_time, 'failed')
       })
     })
   }
@@ -45,12 +41,6 @@ class AxiosUtil {
 
     const params = this.chooseBaseUrl(options)
     return new Promise((resolve, reject) => {
-      const network = $store.state.device.network
-      if (!network) {
-        zlToast({message: '离线状态，不能处理此操作'})
-        zlLoading.close()
-        return
-      }
       axios(params).then(response => {
         const end_time = new Date().getTime()
         let mdType = 'failed'
@@ -62,11 +52,8 @@ class AxiosUtil {
           zlToast({message: res.errormsg})
           mdType = 'failed'
         }
-        this.buried(apiDoors[options.url], end_time - start_time, mdType)
       }).catch(err => {
-        zlToast({message: '提交失败，网络不稳定，请重新提交操作'})
-        const end_time = new Date().getTime()
-        this.buried(apiDoors[options.url], end_time - start_time, 'failed')
+		reject(err)
       })
     })
   }
