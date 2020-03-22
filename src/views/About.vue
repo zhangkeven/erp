@@ -13,50 +13,60 @@
   </div>
 </template>
 <script>
-	import {mapState,mapMutations} from 'vuex'
+	import {
+		mapState,
+		mapMutations
+	} from 'vuex'
 	import AxiosUtil from '@/util/axiosutil'
-	export default{
-		data(){
-			return{
+	export default {
+		data() {
+			return {
 				firstColor: '#1D96FF',
 				secondColor: '#1D96FF',
-				first:localStorage.getItem('firstColor'),
-				second:localStorage.getItem('secondColor'),
+				first: localStorage.getItem('firstColor'),
+				second: localStorage.getItem('secondColor'),
 			}
 		},
-		computed:{
+		computed: {
 			...mapState({
-				name:state=>state.main.name
+				name: state => state.main.name
 			})
 		},
-		methods:{
-			saveColor(){
-				if(this.first==this.firstColor&&this.second == this.secondColor){
-					this.$zlToast({message:'您未修改，返回就行'})
+		methods: {
+			saveColor() {
+				if (this.first == this.firstColor && this.second == this.secondColor) {
+					this.$zlToast({
+						message: '您未修改，返回就行'
+					})
 					return
-				}else{
-					localStorage.setItem('firstColor',this.firstColor)
-					localStorage.setItem('secondColor',this.secondColor)
-					document.getElementsByTagName('body')[0].style.setProperty('--first-color',this.firstColor);
+				} else {
+					localStorage.setItem('firstColor', this.firstColor)
+					localStorage.setItem('secondColor', this.secondColor)
+					document.getElementsByTagName('body')[0].style.setProperty('--first-color', this.firstColor);
 					document.getElementsByTagName('body')[0].style.setProperty('--second-color', this.secondColor);
-					this.$zlToast({message:'设置成功'})
+					this.$zlToast({
+						message: '设置成功'
+					})
 				}
 			},
-			getData(){
+			getData() {
 				AxiosUtil.post({
-				    data:{
-				    access_code:'861b09e8-9120-4cf5-9298-2bf29480968d'
-				    },
-				    url: 'querySaleRecordForReturn'
-				  }).then(res => {
+					data: {
+						access_code: '861b09e8-9120-4cf5-9298-2bf29480968d'
+					},
+					url: 'querySaleRecordForReturn'
+				}).then(res => {
 
-				  }).catch(err => {
+				}).catch(err => {
 
-				  })
+				})
 			}
 		},
 		created() {
 			this.getData()
+		},
+		mounted() {
+
 		}
 	}
 </script>
@@ -64,19 +74,20 @@
 	@import "../assets/style/variable";
 	@import "../assets/style/mixin";
 	.color-page {
-	.demo{
-		width: 200px;
-		height: 20rem;
-		background: red;
-	}
-	.btn{
-		width: 100px;
-		height: 48px;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		background-color: $theme-color3;
-		color:#ffffff;
-	}
+		.demo {
+			width: 200px;
+			height: 20rem;
+			background: red;
+		}
+
+		.btn {
+			width: 100px;
+			height: 48px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background-color: $theme-color3;
+			color: #ffffff;
+		}
 	}
 </style>
