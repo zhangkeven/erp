@@ -3,6 +3,7 @@
     <h1>{{name}}</h1>
 	  <div class="demo">
             <p>ceshi测试</p>
+
 	  </div>
 	  <div class="color-page">
 		  <input v-model="firstColor"/>
