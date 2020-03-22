@@ -17,15 +17,18 @@
         </div>
         <div class="btn" v-if="!onlybtn">
           <div class="cancel">
-            <zl-button :btnName="cancelText" type="info" size="custom" :disabled="disabled" @handleClick="cancel"  />
+			  <span  @click="cancel">{{cancelText}}</span>
+            <!-- <zl-button :btnName="cancelText" type="info" size="custom" :disabled="disabled" @handleClick="cancel"  /> -->
           </div>
           <div class="confirm">
-            <zl-button :btnName="confirmText" type="theme_border" size="custom" :loading="loading" :loading_text="loadingText" @handleClick="confirm"  />
+			  <span  @click="confirm">{{confirmText}}</span>
+            <!-- <zl-button :btnName="confirmText" type="theme_border" size="custom" :loading="loading" :loading_text="loadingText" @handleClick="confirm"  /> -->
           </div>
         </div>
         <div class="onlybtn" v-if="onlybtn">
           <div class="confirm">
-            <zl-button :btnName="confirmText" type="theme_border" size="custom" :loading="loading" :loading_text="loadingText" @handleClick="confirm"  />
+			  <span  :disabled="disabled" :loading="loading" :loading_text="loadingText" @click="confirm">{{confirmText}}</span>
+            <!-- <zl-button :btnName="confirmText" type="theme_border" size="custom" :loading="loading" :loading_text="loadingText" @handleClick="confirm"  /> -->
           </div>
         </div>
       </div>
@@ -187,11 +190,29 @@ export default {
         height: 40px;
         font-size: 16px;
         margin-right: 16px;
+		span{
+			text-align: center;
+			display: inline-block;
+			width: 50px;
+			height: 30px;
+			line-height: 30px;
+			border: 1px solid #D1D1D1;
+			color: #333333;
+		}
       }
       .confirm {
         min-width: 96px;
         height: 40px;
         font-size: 16px;
+		span{
+			text-align: center;
+			display: inline-block;
+			width: 50px;
+			height: 30px;
+			line-height: 30px;
+			background: $theme-color;
+			color: #FFFFFF;
+		}
       }
     }
     .onlybtn {

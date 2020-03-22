@@ -1,16 +1,6 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <div>
-      <p>
-        If Element is successfully added to this project, you'll see an
-        <code v-text="'<el-button>'"></code>
-        below
-      </p>
-      <el-button>el-button</el-button>
-	  <el-checkbox v-model="checked">备选项</el-checkbox>
-    </div>
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+	<router-view/>
   </div>
 </template>
 
@@ -22,21 +12,29 @@ export default {
   components: {
     HelloWorld
   },
+  created() {
+  	this.setColor()
+  },
   data(){
 	  return{
 		  checked:false
 	  }
+  },
+  methods:{
+	  setColor() {
+	    let storge = window.localStorage
+	    let firstColor = storge.getItem('firstColor') || '#00a248'
+	    let secondColor = storge.getItem('secondColor') || '#1E77CB'
+	    document.getElementsByTagName('body')[0].style.setProperty('--first-color', firstColor)
+	    document.getElementsByTagName('body')[0].style.setProperty('--second-color', secondColor)
+	  },
   }
 }
 </script>
 
-<style>
+<style scoped lang="scss">
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  width: 100%;
+  height: 100%;
 }
 </style>
