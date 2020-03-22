@@ -74,12 +74,15 @@ class AxiosUtil {
   // 选择请求路径前缀
   static chooseBaseUrl(options) {
     const urlConfig = {
-		API_DOOR:"http://posuat.cnzhonglunnet.com/",		WS_DOOR:"ws://192.168.1.41:8080/wsms-web/websocket/",		log_url:"http://hmuat.cnzhonglunnet.com/hm.gif",		redirect_door:"http://lsuat.cnzhonglunnet.com/"
+		API_DOOR:"http://posuat.cnzhonglunnet.com/",
+		WS_DOOR:"ws://192.168.1.41:8080/wsms-web/websocket/",
+		log_url:"http://hmuat.cnzhonglunnet.com/hm.gif",
+		redirect_door:"http://lsuat.cnzhonglunnet.com/"
 	}
     // const EnvTest = globalDataTools.getGlobalData('EnvTest')
 	const EnvTest = 'uat'
     let env = options.env || EnvTest
-    const access_code = globalDataTools.getGlobalData('access_code')
+    const access_code = '861b09e8-9120-4cf5-9298-2bf29480968d'
     options.data.access_code = access_code || ''
     let result = {
       url: apiDoors[options.url],
@@ -122,7 +125,6 @@ class AxiosUtil {
     }
 
     let picPrefix = `${urlConfig.log_url}?type=intfanalysis&source=pos&t=`
-    document.getElementById('mm_img_block').innerHTML = `<img style="display: none" src="${picPrefix}${time}&url=${url}&handtime=${interval}&result=${status}"/>`
   }
 }
 
