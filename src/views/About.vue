@@ -2,10 +2,9 @@
   <div class="about">
     <h1>{{name}}</h1>
 	  <div class="demo">
-
+                213312
 	  </div>
 	  <div class="color-page">
-		  <text-title title="自定义主题色"></text-title>
 		  <input v-model="firstColor"/>
 		  <input v-model="secondColor"/>
 		  <div class="btn" @click="saveColor">保存</div>
@@ -44,11 +43,14 @@
 			},
 			getData(){
 				AxiosUtil.post({
+				    data:{
+				    access_code:'861b09e8-9120-4cf5-9298-2bf29480968d'
+				    },
 				    url: 'querySaleRecordForReturn'
 				  }).then(res => {
-				   
+
 				  }).catch(err => {
-				    
+
 				  })
 			}
 		},
@@ -66,10 +68,6 @@
 		height: 20rem;
 		background: red;
 	}
-
-		width: 100%;
-		height: 100%;
-		background-color: #fff;
 	.btn{
 		width: 100px;
 		height: 48px;
@@ -77,6 +75,7 @@
 		justify-content: center;
 		align-items: center;
 		background-color: $theme-color3;
+		color:#ffffff;
 	}
 	}
 </style>
