@@ -2,7 +2,7 @@
   <div class="about">
     <h1>{{name}}</h1>
 	  <div class="demo">
-
+            <p>ceshi</p>
 	  </div>
 	  <div class="color-page">
 		  <text-title title="自定义主题色"></text-title>
