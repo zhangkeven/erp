@@ -88,9 +88,3 @@
         }
     }
 </style>
-<style lang="scss" scoped>
-    @import '../../assets/style/variable';
-    @import '../../assets/style/mixin';
-    @import '../../assets/style/class';
-    @import '../../assets/style/color';
-</style>

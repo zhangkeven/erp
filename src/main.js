@@ -7,12 +7,17 @@ import './util/rem'
 import './assets/style/mixin.scss'
 import './assets/style/variable.scss'
 import './assets/style/base.scss'
-
-Vue.use(NavMenu)
-import NavMenu from '@/components/NavMenu'//侧边栏
+import './assets/style/class.scss'
+import './assets/style/color.scss'
 
 Vue.use(Header)
 import Header from '@/components/Header'//头部
+
+Vue.use(NavMenu)
+import NavMenu from '@/components/NavMenu'//侧边栏菜单
+
+Vue.use(NavSubMenu)
+import NavSubMenu from '@/components/NavSubMenu'//内页子菜单
 
 import zlToast from '@/components/extends/zlToast' // 轻提示
 Vue.use(zlToast)

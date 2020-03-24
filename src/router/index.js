@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import login from '@/pages/login/login.vue'
 import main from '@/pages/main/main.vue'
+import PersonnelList from '@/pages/Personnel/PersonnelList.vue'
+import PersonnelAdd from '@/pages/Personnel/PersonnelAdd.vue'
 
 Vue.use(VueRouter)
 
@@ -16,6 +18,16 @@ const routes = [
     path: '/main',
     name: 'main',
     component: main
+  },
+  {
+    path: '/personnellist',
+    name: 'PersonnelList',
+    component: PersonnelList
+  },
+  {
+    path: '/personneladd',
+    name: 'PersonnelAdd',
+    component: PersonnelAdd
   },
   {
     path: '/about',

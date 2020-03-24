@@ -57,19 +57,13 @@
     }
 </script>
 <style lang="scss">
-    .user-wrap{
-        .el-menu--horizontal>.el-submenu .el-submenu__title{
-            height: auto;
-            line-height: 30px;
-            color: var(--first-color);
-            border-bottom: none;
-            padding: 0;
+    #navmenu{
+        .el-menu{
+            border: none;
         }
-        .el-menu--horizontal>.el-submenu .el-submenu__title:hover{
-            background: none;
-        }
-        .el-menu--horizontal>.el-submenu .el-submenu__icon-arrow{
-            color: var(--first-color);
+        .el-submenu .el-menu-item{
+            min-width: auto;
         }
     }
+
 </style>
