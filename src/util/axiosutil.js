@@ -69,8 +69,8 @@ class AxiosUtil {
     // const EnvTest = globalDataTools.getGlobalData('EnvTest')
 	const EnvTest = 'uat'
     let env = options.env || EnvTest
-    const access_code = '861b09e8-9120-4cf5-9298-2bf29480968d'
-    options.data.access_code = access_code || ''
+    // const access_code = '861b09e8-9120-4cf5-9298-2bf29480968d'
+    // options.data.access_code = access_code || ''
     let result = {
       url: apiDoors[options.url],
       timeout: options.timeout || 20000

@@ -49,7 +49,16 @@
 				}
 			},
 			getData() {
-				
+				AxiosUtil.post({
+					data: {
+						access_code: '417027e2-d658-43f6-9128-48d637225f40'
+					},
+					url: 'querySaleRecordForReturn'
+				}).then(res => {
+			
+				}).catch(err => {
+			
+				})
 			}
 		},
 		created() {
