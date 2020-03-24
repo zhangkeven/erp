@@ -9,7 +9,8 @@ $deg1: 60deg;
 $deg2: 70deg;
 // 页面颜色定义
 $theme-color: var(--first-color);
-$theme-color1: #9B65FF;
+$theme-login-color: #fafdec;
+$theme-color1: #fafdec;
 $theme-color2: #6183E0;
 $theme-color3: var(--first-color);
 $theme-color-image: var(--second-color);
@@ -24,7 +25,7 @@ $success-color: #FF9918;
 $decorate-color: #42A5F5;
 $message-color: #333333;
 $basics-black-color: #000000;
-$basics-white-color: #ffffff;
+$basics-white-color: #FFFFFF;
 $transparent-color: transparent;
 $search-color: #E6E6E6;
 $item-color: #F6F6F6;
@@ -38,14 +39,14 @@ $theme-font-color: #333333;
 $theme-font-color1: #9B65FF;
 $theme-font-color2: #6183E0;
 $theme-font-color3:var(--first-color);
+$theme-font-color4: #000000;
+$theme-font-color5: #B5B5B5;
+$theme-font-color6: #999999;
 $common-font-color: #666666;
 $next-font-color: #666666;
 $orange-font-color: var(--first-color);
 $white-font-color: #FFFFFF;
 $transparent-font-color: #FFFFFF;
-$theme-font-color4: #000000;
-$theme-font-color5: #B5B5B5;
-$theme-font-color6: #999999;
 // 边框颜色定义
 $first-border-color: #B5B5B5;
 $second-border-color: #D1D1D1;
@@ -84,9 +85,9 @@ $basics-shadow2: 0px 8px 12px 0px #6183E0;
 $basics-shadow3: 0px 8px 12px 0px var(--first-color);
 //字符限制
 
-:export {
-  default_font_color: $orange-font-color;
-  theme1_font_color: $theme-font-color1;
-  theme2_font_color: $theme-font-color2;
-  theme3_font_color: $theme-font-color3;
-}
+//:export {
+//  default_font_color: $theme-font-color;
+//  theme1_font_color: $theme-font-color1;
+//  theme2_font_color: $theme-font-color2;
+//  theme3_font_color: $theme-font-color3;
+//}

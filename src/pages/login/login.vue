@@ -2,9 +2,9 @@
 	<div id="login">
 		<div class="logo">
 		</div>
-		<div class="content">
+		<div class="content-login">
 			<div class="top">
-				登录
+				登录系统
 			</div>
 			<div class="bottom">
 				<div class="input">
@@ -15,15 +15,15 @@
 					<el-input placeholder="请输入密码" v-model="password" clearable show-password>
 					</el-input>
 				</div>
-				<div class="btn">
-					<span @click="login">登录</span>
+				<div class="btn-login">
+					<span @click="login" class="btn">登录</span>
 					<span>注册用户</span>
 				</div>
-				<div class="member-word">
+				<div class="btn-login member-word">
 					<span>
 						<el-checkbox v-model="meberword">记住密码</el-checkbox>
 					</span>
-					<span>忘记密码？</span>
+					<span>忘记密码 ?</span>
 				</div>
 			</div>
 		</div>
@@ -51,7 +51,7 @@
 					  confirm: () => {
 					    this.$router.push({
 					    	path:'/main'
-					    })
+					    }),
 						this.$zlDialog.close()
 					  },
 					  cancel: () => {
@@ -64,8 +64,8 @@
 	}
 </script>
 <style lang="scss">
-	#login {
-		.el-input .el-input--suffix {
+	#login{
+		.el-input__inner{
 			height: 30px !important;
 		}
 	}
@@ -73,37 +73,34 @@
 <style lang="scss" scoped>
 	@import "../../assets/style/variable";
 	@import "../../assets/style/mixin";
-
+	@import "../../assets/style/base";
+	@import "../../assets/style/color";
 	#login {
 		width: 100%;
 		height: 100%;
-		background: #fafdec;
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
 
-		.content {
+		.content-login {
 			width: 360px;
 			height: 260px;
-			background: #FFFFFF;
 		}
 
 		.top {
 			width: 100%;
 			height: 40px;
-			line-height: 30px;
-			font-size: 16px;
+			line-height: 38px;
+			font-size: 14px;
 			font-weight: bold;
-			color: #FFFFFF;
 			text-align: center;
-			background-color: $theme-color;
 		}
 
 		.bottom {
 			width: 100%;
 			height: calc(100% - 40px);
-			padding: 20px 0;
+			padding: 30px 0 20px;
 			box-sizing: border-box;
 			display: flex;
 			flex-direction: column;
@@ -111,37 +108,35 @@
 
 			.input {
 				width: 240px;
-				margin-bottom: 10px;
-			}
+				margin-bottom: 15px;
 
-			.btn {
+			}
+			.btn-login.member-word{
+				margin-top: 15px;
+			}
+			.btn-login{
 				width: 240px;
 				display: flex;
 				flex-direction: row;
 				justify-content: space-between;
-
-				span {
-					display: inline-block;
-					width: 70px;
-					height: 30px;
-					line-height: 30px;
-				}
-
-				span:first-child {
+				.btn {
 					text-align: center;
 					background-color: $theme-color;
-					font-size: 14px;
 					color: #FFFFFF;
+					width: 70px;
+					border-radius: 4px;
+				}
+				span {
+					display: inline-block;
+					height: 30px;
+					line-height: 30px;
+					cursor: pointer;
 				}
 			}
 
-			.member-word {
-				margin-top: 10px;
-				width: 240px;
-				display: flex;
-				flex-direction: row;
-				justify-content: space-between;
-			}
+
+
+
 		}
 	}
 </style>

@@ -1,0 +1,41 @@
+@import "variable";
+@import "mixin";
+
+/* ==================
+          颜色定义
+ ==================== */
+/*登录*/
+#login {
+  background: $theme-login-color;
+  .top {
+    color: $white-font-color;
+    background-color: $theme-color;
+  }
+}
+.content-login {
+  background-color: $basics-white-color;
+}
+/*头部*/
+#header{
+  background-color:$theme-login-color;
+  .back-home{
+    color: var(--first-color)
+  }
+  .el-icon-arrow-left{
+    color: var(--first-color)
+  }
+  .el-icon-setting{
+    color: $theme-font-color
+  }
+  .bot-red{
+    background-color: #ff0000;
+  }
+  .head-portrait{
+    background-color: $bg-color;
+  }
+  .user-wrap{
+    .el-menu--horizontal>.el-submenu .el-submenu__title{
+      color: $theme-font-color
+    }
+  }
+}

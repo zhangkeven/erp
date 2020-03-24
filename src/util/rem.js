@@ -4,7 +4,7 @@
  * @desc   px转化rem配置文件
  */
 
-const baseSize = 16
+const baseSize = 14
 
 // 设置 rem 函数
 function setRem() {

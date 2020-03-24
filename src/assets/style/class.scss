@@ -1,0 +1,134 @@
+@import "variable";
+@import "mixin";
+
+/* ==================
+          分类样式
+ ==================== */
+/*头部*/
+#header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 70px;
+  padding: 0 20px;
+  .header-left{
+    width: 600px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    .logo img{
+      width: 150px;
+    }
+    .black-wrap{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: 100px;
+      margin-top: 22px;
+      line-height: 20px;
+      height: 20px;
+      margin-left: 55px;
+      .backHome{
+        height: 20px;
+        display: inline-block;
+        span{
+          font-size: 12px;
+          vertical-align: middle;
+          height: 20px;
+          line-height: 23px;
+          display: inline-block;
+        }
+        img{
+          margin-right: 3px;
+          vertical-align: middle;
+          width: 20px;
+        }
+      }
+      .backTo span,.goTo span{
+        height: 20px;
+        display: inline-block;
+        line-height: 23px;
+      }
+      .el-icon-arrow-left,.el-icon-arrow-right{
+          font-size: 18px;
+          vertical-align: middle;
+      }
+
+    }
+  }
+  .header-right{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    .right-top{
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
+      height: 70px;
+      .el-icon-setting{
+        font-size: 22px;
+      }
+      .bell{
+        position: relative;
+        font-size: 22px;
+        margin:0 10px;
+        .bot-red{
+          border-radius: 50%;
+          height: 6px;
+          width: 6px;
+          display: block;
+          position: absolute;
+          top: -0px;
+          right: 3px;
+        }
+      }
+      .user-wrap{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        height: 36px;
+        .head-portrait{
+          height: 36px;
+          width: 36px;
+          border-radius: 50%;
+          img{
+            width: 36px;
+            border-radius: 50%;
+          }
+        }
+
+        .el-menu.el-menu--horizontal{
+          border:none;
+          background:none;
+          margin-left: 5px;
+        }
+        .el-menu--horizontal>.el-submenu{
+          float: none;
+        }
+
+      }
+    }
+    .local-time{
+      text-align: right;
+      margin-bottom: 5px;
+    }
+  }
+}
+
+/*底部*/
+
+/*左侧边栏*/
+
+/*弹出框*/
+
+/*表单*/
+
+/*表格*/
+
+/*按钮*/
+
+/*其他*/
