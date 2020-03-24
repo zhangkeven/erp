@@ -122,6 +122,17 @@
 /*底部*/
 
 /*左侧边栏*/
+.aside-wrap{
+  height: 100%;
+  #navmenu{
+    width: 200px;
+    height: 100%;
+    .el-menu{
+      border: none;
+    }
+  }
+}
+
 
 /*弹出框*/
 

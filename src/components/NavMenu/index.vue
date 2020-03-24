@@ -1,9 +1,7 @@
 <template>
     <div id="navmenu">
-        <el-row class="tac">
-            <el-col :span="12">
                 <el-menu
-                        default-active="2"
+                        default-active="1-1"
                         class="el-menu-vertical-demo"
                         @open="handleOpen"
                         @close="handleClose"
@@ -41,15 +39,20 @@
                         <span slot="title">导航四</span>
                     </el-menu-item>
                 </el-menu>
-            </el-col>
-        </el-row>
     </div>
 </template>
 
 <script>
     export default {
         name: "NavMenu",
-
+        methods: {
+            handleOpen(key, keyPath) {
+                console.log(key, keyPath);
+            },
+            handleClose(key, keyPath) {
+                console.log(key, keyPath);
+            }
+        }
 
     }
 </script>
@@ -69,10 +72,4 @@
             color: var(--first-color);
         }
     }
-</style>
-<style lang="scss" scoped>
-    @import '../../assets/style/variable';
-    @import '../../assets/style/mixin';
-    @import '../../assets/style/class';
-    @import '../../assets/style/color';
 </style>

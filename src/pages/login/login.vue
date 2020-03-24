@@ -131,6 +131,7 @@
 					height: 30px;
 					line-height: 30px;
 					cursor: pointer;
+					font-size: 12px;
 				}
 			}
 

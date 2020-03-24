@@ -23,8 +23,8 @@ export default {
   methods:{
 	  setColor() {
 	    let storge = window.localStorage
-	    let firstColor = storge.getItem('firstColor') || '#00a248'
-	    let secondColor = storge.getItem('secondColor') || '#1E77CB'
+	    let firstColor = storge.getItem('firstColor') || '#1d7c2a'
+	    let secondColor = storge.getItem('secondColor') || '#00a248'
 	    document.getElementsByTagName('body')[0].style.setProperty('--first-color', firstColor)
 	    document.getElementsByTagName('body')[0].style.setProperty('--second-color', secondColor)
 	  },
