@@ -1,7 +1,5 @@
 <template>
     <div id="PersonnelAdd">
-        <Header/>
-        <el-aside class="aside-wrap" width="300px"><NavMenu/></el-aside>
         <NavSubMenu/>
     </div>
 </template>

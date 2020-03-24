@@ -29,7 +29,9 @@
                     show-overflow-tooltip>
             </el-table-column>
         </el-table>
-
+		<div @click="topage">
+			跳转页面
+		</div>
     </div>
 </template>
 
@@ -83,7 +85,15 @@
             },
             handleSelectionChange(val) {
                 this.multipleSelection = val;
-            }
+            },
+			topage(){
+				this.$router.push({
+					path:'/personneladd',
+					query:{
+						
+					}
+				})
+			}
         }
     }
 </script>
