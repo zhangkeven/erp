@@ -5,7 +5,7 @@ import login from '@/pages/login/login.vue'
 import main from '@/pages/main/main.vue'
 import PersonnelList from '@/pages/Personnel/PersonnelList.vue'
 import PersonnelAdd from '@/pages/Personnel/PersonnelAdd.vue'
-
+import setColor from '@/pages/setColor.vue'
 Vue.use(VueRouter)
 
 const routes = [{
@@ -27,6 +27,11 @@ const routes = [{
 				path: '/personneladd',
 				name: 'PersonnelAdd',
 				component: PersonnelAdd
+			},
+			{
+				path: '/setColor',
+				name: 'setColor',
+				component: setColor
 			},
 		]
 	},

@@ -6,14 +6,14 @@
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
-
+import commonUtil from '@/util/commonUtil'
 export default {
   name: 'app',
   components: {
     HelloWorld
   },
   created() {
-  	this.setColor()
+  	commonUtil.initColor()  //初始化主题色
   },
   data(){
 	  return{
@@ -22,11 +22,7 @@ export default {
   },
   methods:{
 	  setColor() {
-	    let storge = window.localStorage
-	    let firstColor = storge.getItem('firstColor') || '#1d7c2a'
-	    let secondColor = storge.getItem('secondColor') || '#00a248'
-	    document.getElementsByTagName('body')[0].style.setProperty('--first-color', firstColor)
-	    document.getElementsByTagName('body')[0].style.setProperty('--second-color', secondColor)
+	    
 	  },
   }
 }

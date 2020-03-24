@@ -5,7 +5,7 @@
                         class="el-menu-vertical-demo"
                         @open="handleOpen"
                         @close="handleClose"
-                        background-color="#1d7c2a"
+                        :background-color="themeColor"
                         text-color="#fff"
                         active-text-color="#d7e81b">
                     <el-submenu index="1">
@@ -43,15 +43,26 @@
 </template>
 
 <script>
+	import {mapState} from 'vuex'
     export default {
         name: "NavMenu",
+		computed:{
+			...mapState({
+				themeColor:state=>state.setcolor.themeColor
+			})
+		},
+		data(){
+			return{
+				
+			}
+		},
         methods: {
             handleOpen(key, keyPath) {
                 console.log(key, keyPath);
             },
             handleClose(key, keyPath) {
                 console.log(key, keyPath);
-            }
+            },
         }
 
     }

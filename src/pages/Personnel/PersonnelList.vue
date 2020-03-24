@@ -32,6 +32,9 @@
 		<div @click="topage">
 			跳转页面
 		</div>
+		<div @click="goset">
+			跳转到修改主题色
+		</div>
     </div>
 </template>
 
@@ -74,6 +77,11 @@
         },
 
         methods: {
+			goset(){
+				this.$router.push({
+					path:'/setColor'
+				})
+			},
             toggleSelection(rows) {
                 if (rows) {
                     rows.forEach(row => {

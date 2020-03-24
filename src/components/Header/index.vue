@@ -6,13 +6,13 @@
             </div>
             <div class="black-wrap">
                 <div class="backTo" v-show="isShow">
-                    <span v-on:click="back"><i class="el-icon-arrow-left"></i></span>
+                    <span @click="back"><i class="el-icon-arrow-left"></i></span>
                 </div>
                 <div class="back-home" v-show="isShow">
                     <span @click="backHome" class="backHome"><img src="../../assets/img/green-home-icon.png" alt="back"><span>首页</span></span>
                 </div>
                 <div class="goTo" v-show="isShow">
-                    <span v-on:click="goto"><i class="el-icon-arrow-right"></i></span>
+                    <span @click="go"><i class="el-icon-arrow-right"></i></span>
                 </div>
             </div>
         </div>
@@ -57,7 +57,9 @@
             },
             handleSelect(key, keyPath) {
                 console.log(key, keyPath);
-            }
+            },
+			backHome(){},
+			go(){}
         },
         watch:{
             $route(now,old){     //监控路由变换，控制返回按钮的显示
