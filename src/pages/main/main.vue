@@ -1,13 +1,22 @@
 <template>
 	<div id="main">
-		<Header/>
-		<div class="content">
-			<div class="left">
-				<el-aside class="aside-wrap"><NavMenu/></el-aside>
+		<div class="headerContent">
+			<Header/>
+		</div>
+		<div class="footerContent">
+			<Footer/>
+		</div>
+		<div class="mainContent">
+			<div class="mainCenter">
+				<div class="mianLeft"></div>
+				<div class="mianRight">
+					<NavSubMenu/>
+					<router-view/>
+				</div>
 			</div>
-			<div class="right">
-				<router-view/>
-			</div>
+		</div>
+		<div class="asideLeft">
+			<el-aside class="aside-wrap"><NavMenu/></el-aside>
 		</div>
 	</div>
 
@@ -16,11 +25,15 @@
 <script>
 	import Header from '@/components/Header/index.vue'
 	import NavMenu from '@/components/NavMenu/index.vue'
+	import NavSubMenu from '@/components/NavSubMenu/index.vue'
+	import Footer from '@/components/Footer/index.vue'
 	export default {
 		name: "Main",
 		components: {
 			Header,
-			NavMenu
+			NavMenu,
+			NavSubMenu,
+			Footer
 		}
 	}
 
@@ -30,23 +43,7 @@
 	.el-submenu .el-menu-item{
 		min-width: auto;
 	}
-</style>
-<style lang="scss" scoped>
-	@import '../../assets/style/variable';
-	@import '../../assets/style/mixin';
-	@import '../../assets/style/class';
-	@import '../../assets/style/color';
-	.content{
-		width: 100%;
-		height: calc(100% - 70px);
-		display: flex;
-		flex-direction: row;
-		.left{
-			// width: 220px;
-		}
-		.right{
-			flex: 1;
-			height: 100%;
-		}
+	.aside-wrap{
+		width: 180px !important;
 	}
 </style>

@@ -9,6 +9,7 @@ $deg1: 60deg;
 $deg2: 70deg;
 // 页面颜色定义
 $theme-color: var(--first-color);
+$theme-08color: var(--first-color);
 $theme-login-color: #fafdec;
 $theme-color1: #fafdec;
 $theme-color2: #6183E0;
@@ -26,6 +27,7 @@ $decorate-color: #42A5F5;
 $message-color: #333333;
 $basics-black-color: #000000;
 $basics-white-color: #FFFFFF;
+$basics-08white-color:rgba(255,255,255,0.8);
 $transparent-color: transparent;
 $search-color: #E6E6E6;
 $item-color: #F6F6F6;
@@ -33,7 +35,17 @@ $theme-color-5: #D1D1D1;
 $bg-color: #E8E8E8;
 $theme-color-5: #EFF3F6;
 $theme-color-6: #7F90A4;
-
+$theme-color-7: #dfeae1;
+$theme-BrightYellow-color:#d7e81b;
+$theme-grey-color:#888888;
+$theme-red-color:#FF0000;
+$theme-paleGrey-color:#EFEFEF;
+$theme-lightGreen-color:#c6deca;
+$theme-paleGreen-color:#f0f6f1;
+$theme-oxbloodRed-color:#d81b1b;
+$theme-green-color:#00a847;
+$theme-lightGrey-color:#CCCCCC;
+$theme-color-8:#F5F7FA;
 // 字体颜色定义
 $theme-font-color: #333333;
 $theme-font-color1: #9B65FF;
@@ -47,6 +59,8 @@ $next-font-color: #666666;
 $orange-font-color: var(--first-color);
 $white-font-color: #FFFFFF;
 $transparent-font-color: #FFFFFF;
+$lightGrey-font-color:#CCCCCC;
+
 // 边框颜色定义
 $first-border-color: #B5B5B5;
 $second-border-color: #D1D1D1;
@@ -57,6 +71,7 @@ $border-color2: #6183E0;
 $border-color3: var(--first-color);
 $border-color4: #E6E6E6;
 $border-color5: #D6D7D8;
+$border-color6: #DCDFE6;
 
 
 // 区分底色

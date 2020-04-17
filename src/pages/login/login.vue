@@ -8,16 +8,16 @@
 			</div>
 			<div class="bottom">
 				<div class="input">
-					<el-input placeholder="请输入用户名" v-model="name" clearable>
+					<el-input placeholder="请输入用户名" v-model="loginForm.username" clearable>
 					</el-input>
 				</div>
 				<div class="input">
-					<el-input placeholder="请输入密码" v-model="password" clearable show-password>
+					<el-input placeholder="请输入密码" v-model="loginForm.password" clearable show-password>
 					</el-input>
 				</div>
 				<div class="btn-login">
 					<span @click="login" class="btn">登录</span>
-					<span>注册用户</span>
+<!--					<span>注册用户</span>-->
 				</div>
 				<div class="btn-login member-word">
 					<span>
@@ -34,39 +34,62 @@
 	export default {
 		data() {
 			return {
-				name: '', //用户名
-				password: '', //密码
+				// name: '', //用户名
+				// password: '', //密码
 				meberword: false,
+				loginForm: {
+					username: '',
+					password: ''
+				},
+				userToken: ''
 			}
 		},
 		methods:{
 			login(){
-				this.$zlToast('登录成功！')
-				setTimeout(()=>{
-					this.$zlDialog({
-					  contentText: '是否跳转主页？',
-					  confirmText: '是',
-					  cancelText: '否',
-					  loadingText: '跳转中...',
-					  confirm: () => {
-					    this.$router.push({
-					    	path:'/main'
-					    }),
-						this.$zlDialog.close()
-					  },
-					  cancel: () => {
-					  }
-					})
-					
-				},500)
+				let _this = this;
+				if (this.loginForm.username === '' || this.loginForm.password === '') {
+					setTimeout(()=>{
+						this.$zlDialog({
+						  contentText: '账号或密码不能为空！',
+						  cancelText: '确定',
+						  cancel: () => {//关闭弹出框
+						  }
+						})
+
+					},500)
+				}else {
+						    this.$router.push({
+						    	path:'/main'
+						    })
+					// this.axios({
+					// 	method: 'post',
+					// 	url: '/user/login',
+					// 	data: _this.loginForm
+					// }).then(res => {
+					// 	console.log(res.data);
+					// 	_this.userToken = 'Bearer ' + res.data.data.body.token;
+					// 	// 将用户token保存到vuex中
+					// 	_this.changeLogin({ Authorization: _this.userToken });
+					// 	_this.$router.push('/home');
+					// 	alert('登陆成功');
+					// }).catch(error => {
+					// 	alert('账号或密码错误');
+					// 	console.log(error);
+					// });
+				}
+
 			}
 		}
 	}
+
 </script>
 <style lang="scss">
 	#login{
 		.el-input__inner{
 			height: 30px !important;
+			padding: 0 15px;
+			font-size: 12px;
+			color:#333;
 		}
 	}
 </style>
@@ -82,10 +105,16 @@
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
-
+		.el-input__inner{
+			color: $theme-font-color;
+		}
+		.el-input.is-active .el-input__inner, .el-input__inner:focus{
+			border-color:var(--first-color);
+		}
 		.content-login {
 			width: 360px;
 			height: 260px;
+			border-radius:8px;
 		}
 
 		.top {
@@ -95,8 +124,7 @@
 			font-size: 14px;
 			font-weight: bold;
 			text-align: center;
-		}
-
+			border-radius: 8px 8px 0 0;}
 		.bottom {
 			width: 100%;
 			height: calc(100% - 40px);
@@ -133,11 +161,15 @@
 					cursor: pointer;
 					font-size: 12px;
 				}
+
 			}
 
-
-
-
 		}
+	}
+	.el-checkbox__label {
+		display: inline-block;
+		padding-left: 10px;
+		line-height: 19px;
+		font-size: 14px;
 	}
 </style>

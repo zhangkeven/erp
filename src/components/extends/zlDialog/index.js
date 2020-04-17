@@ -28,7 +28,15 @@ let zlDialog = (options) => {
    instance.onlybtn = options.onlybtn ? options.onlybtn :false
    instance.inputPlaceholder = options.inputPlaceholder ? options.inputPlaceholder :'请输入内容'
    instance.type = options.type ? options.type :'text'
-   if(options.confirm && typeof(options.confirm)==='function'){
+
+     instance.TreeTitle = options.TreeTitle ? options.TreeTitle :''////权限-菜单设置 -标题
+     instance.popupTypeName = options.popupTypeName ? options.popupTypeName :'default'  ////权限-菜单设置
+     instance.menuProps = options.menuProps ? options.menuProps :{}  ////权限-菜单设置
+     instance.menuData = options.menuData ? options.menuData :[]  ////权限-菜单设置
+     if(options.cancelbox && typeof(options.cancelbox)==='function'){////权限-菜单设置
+         instance.cancelBoxCallBack = options.cancelbox
+     }
+     if(options.confirm && typeof(options.confirm)==='function'){
      instance.confirmCallBack = options.confirm
    }
    if(options.cancel && typeof(options.cancel)==='function'){
@@ -37,6 +45,9 @@ let zlDialog = (options) => {
    if(options.getValue && typeof(options.getValue)==='function'){
      instance.getValueCallBack = options.getValue
    }
+     if(options.menuTreeConfirm && typeof(options.menuTreeConfirm)==='function'){////权限-菜单设置
+         instance.menuTreeConfirm = options.menuTreeConfirm
+     }
  } else {
    return
  }

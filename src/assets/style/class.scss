@@ -4,6 +4,40 @@
 /* ==================
           分类样式
  ==================== */
+/*头部底部侧边栏固定，中间滚动*/
+#main{
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+.headerContent,.footerContent {
+  position: absolute;
+  width: 100%;
+  left: 0;
+}
+.headerContent{
+  top:0;
+  height: 70px;
+}
+.footerContent{
+  bottom:0;
+  height: 35px;
+}
+.asideLeft{
+  width:180px;
+  position:absolute;
+  left:0;
+  top: 70px;
+  bottom: 0;
+}
+.mainContent{
+  position:absolute;
+  left:0;
+  top: 70px;
+  bottom: 35px;
+  width: 100%;
+}
+
 /*头部*/
 #header{
   display: flex;
@@ -29,7 +63,7 @@
       margin-top: 22px;
       line-height: 20px;
       height: 20px;
-      margin-left: 55px;
+      margin-left: 25px;
       .backHome{
         height: 20px;
         display: inline-block;
@@ -69,16 +103,13 @@
       align-items: center;
       height: 70px;
       .el-icon-setting{
-        font-size: 22px;
+        font-size: 18px;
       }
       .bell{
         position: relative;
-        font-size: 22px;
+        font-size: 18px;
         margin:0 10px;
         .bot-red{
-          border-radius: 50%;
-          height: 6px;
-          width: 6px;
           display: block;
           position: absolute;
           top: -0px;
@@ -120,24 +151,400 @@
 }
 
 /*底部*/
+#footer{
+  width: 100%;
+  height: 35px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  .footerLeft{
+    width: 180px;
+  }
+  .footerRight{
+    text-align: center;
+    font-size: 12px;
+    padding: 0;
+    margin: 0;
+    line-height: 35px;
+    width: 100%;
+  }
+}
 
+/*mian 左右布局*/
+.mainCenter{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100%;
+  .mianLeft{
+    width: 180px;
+  }
+  .mianRight{
+    flex: 1;
+    height: 100%;
+    margin:0 15px;
+    overflow-y: auto;
+  }
+}
 /*左侧边栏*/
 .aside-wrap{
   height: 100%;
   #navmenu{
-    width: 220px;
     height: 100%;
+    .el-menu-item{
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+    }
+    .bot-black-icon{
+      margin: 0 10px 0 0;
+    }
 
   }
 }
 
+/*内部菜单*/
+/*面包屑*/
+#Breadcrumb{
+  .el-breadcrumb{
+    font-size: 14px;
+    margin: 20px 0 15px 10px;
+  }
+}
 
 /*弹出框*/
 
 /*表单*/
+.formWrapTwo{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.formSubm{
+  display: block;
+  width: 100%;
+  margin-top: 15px;
+}
+.timeIcon{
+  .el-input__inner{
+    cursor: pointer;
+  }
+}
+.globalForm{
+  .formRight{
+    margin-right: 5%;
+    width: 45%;
+    max-width: 400px;
+  }
+  .formLeft{
+    width: 50%;
+    max-width: 400px;
+  }
+  .el-form-item{
+    margin-bottom: 15px;
+  }
+  .el-form-item__label,lable{
+    font-size: 12px;
+    padding: 0 10px 0 0;
+    line-height: 32px;
+    width: 100px !important;
+  }
+  .el-input__inner,input,.el-textarea__inner{
+    line-height: 32px;
+    font-size: 12px;
+    padding: 2px 10px;
+    height: 32px;
+    //border: 1px solid #efefef;
+    border-radius: 4px;
+    width: 100%;
+  }
+  .el-select{
+    width: 100%;
+  }
+  .selectCheckbox .el-input__inner,.selectCheckbox input,.selectCheckbox .el-select,{
+    height: auto;
+  }
+  .el-textarea .el-textarea__inner{
+    height: auto;
+    line-height: 25px;
+    min-height: 55px !important;
+
+  }
+  .el-form-item.is-error .el-textarea__inner{
+    line-height: 25px;
+    height: 25px;
+    font-size: 14px;
+    padding: 2px 10px;
+  }
+  .el-form-item__error{
+    padding-top: 25px;
+  }
+  .el-input,.el-form-item__content,.el-select .el-input .el-select__caret{
+    line-height: 32px;
+    font-size: 14px;
+    padding: 0;
+    height: 32px;
+  }
+
+  .el-form-item__content{
+    margin-left: 100px !important;
+    padding: 0;
+  }
+  .el-select .el-input__inner{
+    padding-right: 20px;
+  }
+  .el-tag--small{
+    line-height: 28px;
+  }
+  .el-select .el-tag{
+    margin: 0;
+    display: inline-block;
+    font-size: 14px;
+  }
+  .el-select .el-tag__close.el-icon-close{
+    right: -7px;
+  }
+  .el-tag .el-icon-close{
+    height: 20px;
+    width: 20px;
+  }
+  .el-select .el-tag__close{
+    margin-top: -5px;
+  }
+
+}
+.el-popper.el-select-dropdown{
+  margin-top: 12px !important;
+  .el-select-dropdown__list .el-select-dropdown__item{
+    padding: 0;
+    height: 34px;
+    line-height: 32px;
+    padding: 0 10px;
+    span{
+      font-size: 14px;
+      line-height: 32px;
+      height: 34px;
+      //padding: 0 10px;
+      //display: inline-block;
+    }
+  }
+}
+/*搜索*/
+.searchWord{
+  width: 200px;
+  position: relative;
+  height: 28px;
+  margin: 0 15px;
+  border-radius: 50px;
+  input,.el-input{
+    width: 100% !important;
+    height: 28px;
+    line-height: 26px;
+    border:none;
+    font-size: 12px;
+    background: none;
+  }
+  i{
+    position: absolute;
+    right: 7px;
+    top:0;
+    line-height: 26px;
+    font-size: 16px;
+  }
+}
 
 /*表格*/
+.tableTop{
+  .tableTopRight{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    .btn{
+      margin-left: 15px;
+    }
+  }
+}
+.TableList{
+  .el-table{
+    margin-top: 8px;
+    font-size: 12px;
+    thead .cell{
+      font-weight: bold;
+    }
+    th,tr,td,th.is-leaf{
+      border: none;
+      padding: 5px 0;
+    }
+    .el-button--small, .el-button--small.is-round{
+      padding: 0;
+    }
+    .cell{
+      line-height: 30px;
+      padding: 0 10px;
+    }
+    .el-button--mini, .el-button--mini.is-round,.el-button--small{
+      padding: 0px 7px;
+      font-size: 12px;
+    }
+    .el-button{
+      border-width: 1px;
+      border-style: solid;
+      border-radius: 4px;
+      height: 24px;
+      line-height: 22px;
+    }
+    .el-button+.el-button{
+      margin-left: 15px;
+    }
+    .el-tag{
+      border:none;
+      background: none;
+      font-size: 12px;
+    }
+    .el-tag--medium{
+      line-height: 30px;
+      padding: 0;
+      height: 28px;
+      cursor: pointer;
+    }
+  }
+}
+
 
 /*按钮*/
+.el-form-item__content{
+  .el-switch{
+    height: 20px;
+    line-height: 20px;
+  font-size: 14px;
+  }
+}
+
+button,
+.button,
+.btn,
+.sunmenuBtn.el-button--primary,
+.sunmenuBtn,
+.el-button,
+.sunmenuBtn.el-button,
+.el-button.resetBtn,
+.el-button.cancel,
+.resetBtn,
+.cancel{
+  border-radius: 4px;
+  padding: 0 10px;
+  line-height: 26px;
+  font-size: 12px;
+  height: 26px;
+  display: inline-block;
+  text-align: center;
+  border:none;
+  cursor: pointer;
+}
+.setBtn{
+  width: 32px;
+}
+button:hover,
+.button:hover,
+.addBtn:hover,
+.setBtn:hover,
+.sunmenuBtn.el-button--primary:hover,
+.sunmenuBtn:hover,
+cancel:hover,
+.confirm:hover,
+button:focus,
+.button:focus,
+.addBtn:focus,
+.setBtn:focus,
+.sunmenuBtn.el-button--primary:focus,
+.sunmenuBtn:focus,
+.el-button.resetBtn:hover,
+.el-button.cancel:hover,
+.resetBtn:hover,
+.cancel:hover,
+.el-button.resetBtn:focus,
+.el-button.cancel:focus,
+.resetBtn:focus,
+.cancel:focus,
+.confirm:focus{
+  opacity: 0.75;
+}
+
+/*弹出框 -树状菜单*/
+.treeWrap{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  .treeBg{
+    width: 360px;
+    height: 320px;
+    position: relative;
+    .treeCont{
+      width: 100%;
+      height: 280px;
+      overflow-y: auto;
+      border-radius: 0 0 8px 8px;
+      .el-tree{
+        padding: 15px;
+        .el-tree-node__content:hover,.el-tree-node:focus>.el-tree-node__content{
+          background: none !important;
+        }
+        .el-tree-node__content>.el-tree-node__expand-icon{
+          padding: 0px 3px 0 0;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+  .cancelbox{
+    position: absolute;
+    left: 0;
+    top:0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    span{
+      display: block;
+      width: 38px;
+      height: 38px;
+      cursor: pointer;
+    }
+    i{
+      font-size: 18px;
+      text-align: center;
+      display: block;
+      line-height: 38px;
+      color: #fff;
+    }
+  }
+  .confirmbox{
+    text-align: center;
+    padding: 15px;
+  }
+  .TreeTitle{
+    font-size: 14px;
+    width: 100%;
+    height: 40px;
+    line-height: 38px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 8px 8px 0 0;
+  }
+}
 
 /*其他*/
+.el-pagination{
+  margin-top: 10px;
+}
+/*圆点*/
+.bot-black-icon,.bot-red{
+  border-radius: 50%;
+  height: 6px;
+  width: 6px;
+  display: inline-block;
+}

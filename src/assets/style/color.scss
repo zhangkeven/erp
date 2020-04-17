@@ -13,7 +13,7 @@
   }
 }
 .content-login {
-  background-color: $basics-white-color;
+  background-color: $basics-08white-color;
 }
 /*头部*/
 #header{
@@ -27,9 +27,7 @@
   .el-icon-setting{
     color: $theme-font-color
   }
-  .bot-red{
-    background-color: #ff0000;
-  }
+
   .head-portrait{
     background-color: $bg-color;
   }
@@ -39,7 +37,152 @@
     }
   }
 }
+/*底部*/
+#footer{
+  .footerRight{
+    color: var(--first-color) ;
+    background-color: $theme-login-color;
+  }
+}
 /*左侧边栏*/
 #navmenu{
   background-color: var(--first-color);
+  .el-menu-item-group .is-active .bot-black-icon{
+    background-color: $theme-BrightYellow-color;
+  }
+}
+/*内部菜单*/
+
+/*面包屑*/
+#Breadcrumb{
+  .el-breadcrumb__inner a:hover, .el-breadcrumb__inner.is-link:hover{
+    color:var(--first-color) ;
+  }
+}
+
+
+/*按钮*/
+button,
+.button,
+.addBtn,
+.setBtn,
+.sunmenuBtn.el-button--primary,
+.sunmenuBtn,
+.el-button,
+.sunmenuBtn.el-button,
+button:hover,
+.button:hover,
+.addBtn:hover,
+.setBtn:hover,
+.sunmenuBtn.el-button--primary:hover,
+.sunmenuBtn:hover,
+.el-button:hover,
+.sunmenuBtn.el-button:hover,
+button:focus,
+.button:focus,
+.addBtn:focus,
+.setBtn:focus,
+.el-button:focus,
+.sunmenuBtn.el-button:focus,
+.sunmenuBtn.el-button--primary:focus,
+.sunmenuBtn:focus{
+  background-color: var(--first-color);
+  color: $white-font-color;
+}
+.el-button.resetBtn,
+.el-button.cancel,
+.resetBtn,
+.cancel,
+.el-button.resetBtn:hover,
+.el-button.cancel:hover,
+.resetBtn:hover,
+.cancel:hover,
+.el-button--default.resetBtn:focus,
+.el-button--default.cancel:focus,
+.resetBtn:focus,
+.cancel:focus{
+  background-color: $theme-grey-color;
+  color: $white-font-color;
+}
+/*表单*/
+.globalForm{
+  .el-input__inner,.input,.el-textarea__inner{
+    background-color: $theme-paleGreen-color;
+  }
+  .el-switch.is-checked .el-switch__core{
+    border-color: var(--first-color) ;
+    background-color: var(--first-color) ;
+  }
+}
+/*点*/
+.bot-red{
+  background-color: $theme-red-color;
+}
+.bot-black-icon{
+  background-color: $basics-white-color;
+}
+/*树形菜单 弹出框*/
+.treeCont{
+  background-color: $basics-08white-color;
+  .el-tree{
+    background: none;
+  }
+  .el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner{
+    background-color:var(--first-color);
+  }
+}
+.TreeTitle{
+  background-color: var(--first-color);
+  color: $white-font-color;
+}
+/*搜索*/
+.searchWord{
+  background-color: $theme-paleGrey-color;
+  i{
+    color: $white-font-color;
+  }
+}
+/*表格*/
+.TableList{
+  .el-table{
+    color: $theme-font-color;
+    thead,.el-tag{
+      color: $theme-font-color;
+    }
+    th{
+      background-color: $theme-paleGreen-color;
+    }
+    tbody{
+      tr:nth-child(odd){
+        background-color: $basics-white-color;
+      }
+      tr:nth-child(even){
+        background-color: $theme-paleGreen-color;
+      }
+    }
+    .el-button{
+      color: var(--first-color) ;
+      border-color: $theme-paleGreen-color;
+    }
+    .el-button:hover{
+      border-color: $theme-paleGreen-color;
+    }
+    .el-button--danger,.el-button--text{
+      color: $white-font-color;
+    }
+    .el-button--text{
+      background-color:var(--first-color) ;
+      border-color: var(--first-color);
+    }
+    .el-button--danger{
+      border-color: $theme-oxbloodRed-color;
+      background-color: $theme-oxbloodRed-color;
+    }
+    .descending .sort-caret.descending{
+      border-top-color:var(--first-color) ;
+    }
+    .ascending .sort-caret.ascending{
+      border-bottom-color:var(--first-color) ;
+    }
+  }
 }

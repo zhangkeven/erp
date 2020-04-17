@@ -1,7 +1,7 @@
 <template>
   <div id="zl-dialog" class="" v-show="show" @click="closeModal">
     <transition name="zlDialog">
-      <div class="modal" @click.stop v-show="show">
+      <div v-if="popupTypeName == 'default'" class="modal" v-show="show">
         <div class="top-title" v-if="topTitle!=''">
           <p class="btn-icon">
             <i class="icon"></i>
@@ -18,12 +18,12 @@
         <div class="btn" v-if="!onlybtn">
           <div class="cancel">
 			  <span  @click="cancel">{{cancelText}}</span>
-            <!-- <zl-button :btnName="cancelText" type="info" size="custom" :disabled="disabled" @handleClick="cancel"  /> -->
+<!--             <zl-button :btnName="cancelText" type="info" size="custom" :disabled="disabled" @handleClick="cancel"  />-->
           </div>
-          <div class="confirm">
-			  <span  @click="confirm">{{confirmText}}</span>
-            <!-- <zl-button :btnName="confirmText" type="theme_border" size="custom" :loading="loading" :loading_text="loadingText" @handleClick="confirm"  /> -->
-          </div>
+<!--          <div class="confirm">-->
+<!--			  <span  @click="confirm">{{confirmText}}</span>-->
+<!--            &lt;!&ndash; <zl-button :btnName="confirmText" type="theme_border" size="custom" :loading="loading" :loading_text="loadingText" @handleClick="confirm"  /> &ndash;&gt;-->
+<!--          </div>-->
         </div>
         <div class="onlybtn" v-if="onlybtn">
           <div class="confirm">
@@ -32,14 +32,55 @@
           </div>
         </div>
       </div>
+      <!--    菜单树状分类-->
+      <div class="treeWrap" v-if="popupTypeName == 'menuBtn'" v-show="show">
+        <div class="treeBg">
+          <h2 class="TreeTitle">{{TreeTitle}}</h2>
+          <div class="cancelbox">
+            <span  @click="cancelbox"><i class="el-icon-close"></i></span>
+          </div>
+          <div class="treeCont">
+            <el-tree
+                    :data="menuData"
+                    show-checkbox
+                    default-expand-all
+                    node-key="id"
+                    ref="tree"
+                    highlight-current
+                    :props="menuProps"
+                    :default-expanded-keys="[]"
+                    :default-checked-keys="default_select">
+            </el-tree>
+
+            <div class="confirmbox">
+              <el-button @click="getCheckedKeys" class="sunmenuBtn Btn">确定</el-button>
+              <el-button @click="resetChecked" class="resetBtn Btn">清空</el-button>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
     </transition>
+
+
   </div>
 </template>
 <script>
 // import zlDialog from '@/common/plugins/zlDialog';
+import {Tree} from 'element-ui'
 export default {
   data() {
     return {
+      menuTreeConfirm:null,
+      popupTypeName:'default', //弹框内容类型  //权限-菜单设置
+      menuData:[],
+      menu_ids: [],
+      default_select: [],// 默认选中 //权限-菜单设置
+      cancelBoxCallBack: null,//树形菜单关闭按钮点击触发回调函数
+
+      role_id: 0,
+      TreeTitle:'选择菜单',
       topTitle:'头部标题',
       title: '提示框',
       confirmText: '确定',//右侧按钮名称
@@ -73,13 +114,74 @@ export default {
     this.inputValue='';
   },
   methods: {
-    closeModal() {
+    /**
+     * 获取详情
+     */
+    getDetail() {
+      let that = this;
+      that.$http.post(that.adminApi.api_url + "/Role/show_edit", {
+        token: that.token,
+        role_id: that.role_id
+      }, {
+        emulateJSON: true
+      }).then(
+              function (res) {
+                var menuData = res.body;
+                if (menuData) {
+                  that.ruleForm.name = menuData.name;
+                  that.ruleForm.sort = menuData.sort;
+                  that.ruleForm.status = menuData.status.toString();
+
+
+                  /**重点开始*/
+                  if(typeof (menuData.menu_id) == 'object'){
+                    //转数组
+                    menuData.menu_id = Object.keys(menuData.menu_id).map(key=> menuData.menu_id[key]);
+                  }
+                  //赋值
+                  menuData.menu_id.forEach((value)=>{
+                    that.default_select.push(value);
+                  });
+
+                  setTimeout(function () {
+                    that.default_select.forEach((value)=>{
+                      that.$refs.tree.setChecked(value,true,false)
+                    });
+                  },100);
+                  that.menu_ids = menuData.menu_id;
+                  /**重点结束*/
+                }
+              });
+    },
+
+    /**
+     * 属性控件
+     */
+
+    // handleNodeClick(menuData) {  //树状菜单选中回调方法
+    //   if (typeof this.menuTreeConfirm === 'function') {
+    //     this.menuTreeConfirm(menuData);
+    //   }
+    // },
+
+    getCheckedKeys(menuData) {//获取选中菜单的id并传入页面
+      if (typeof this.menuTreeConfirm === 'function') {
+        this.menuTreeConfirm(this.$refs.tree.getCheckedKeys());
+      }
+    },
+    resetChecked() {//清除菜单选择项
+      if (typeof this.menuTreeConfirm === 'function') {
+        this.$refs.tree.setCheckedKeys([]);
+      }
+    },
+
+    closeModal() {//默认弹出框关闭弹出框
       if (this.isModalClose && !this.loading) {
         this.show = false;
         // this.cancelCallBack();
       }
     },
-    confirm() {
+    confirm() {//默认弹出框选择确定
       if (typeof this.confirmCallBack === 'function') {
         this.confirmCallBack(this.inputValue);
         if(this.type=='input')return
@@ -87,12 +189,19 @@ export default {
         this.disabled = true;
       }
     },
-    cancel() {
+    cancel() {//关闭默认弹出框
       if (typeof this.cancelCallBack === 'function') {
         this.cancelCallBack();
         this.show = false;
       }
     },
+    //关闭树形菜单
+    cancelbox(){
+      if (typeof this.cancelBoxCallBack === 'function') {
+        this.cancelBoxCallBack();
+        this.show = false;
+      }
+    }
     // getValue(e){
     //   this.inputValue=e
     // }
@@ -135,6 +244,7 @@ export default {
     flex-direction: column;
     align-items: center;
     position: relative;
+    border-radius: 8px;
     .top-title{
       width: 100%;
       height: 40px;
@@ -184,46 +294,31 @@ export default {
       width: 100%;
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
-      .cancel {
-        min-width: 96px;
-        height: 40px;
-        font-size: 16px;
-        margin-right: 16px;
-		span{
-			text-align: center;
-			display: inline-block;
-			width: 50px;
-			height: 30px;
-			line-height: 30px;
-			border: 1px solid #D1D1D1;
-			color: #333333;
-		}
-      }
-      .confirm {
-        min-width: 96px;
-        height: 40px;
-        font-size: 16px;
-		span{
-			text-align: center;
-			display: inline-block;
-			width: 50px;
-			height: 30px;
-			line-height: 30px;
-			background: $theme-color;
-			color: #FFFFFF;
-		}
-      }
-    }
-    .onlybtn {
-      width: 100%;
-      display: flex;
-      flex-direction: row;
       justify-content: center;
+      span{
+        border-radius: 4px;
+        padding: 0 20px;
+        line-height: 28px;
+        font-size: 12px;
+        height: 28px;
+        display: inline-block;
+        text-align: center;
+        border:none;
+        cursor: pointer;
+      }
+      .cancel {
+        padding: 0;
+        margin-right: 40px;
+		span{
+          background: $theme-color;
+          color: #FFFFFF;
+		}
+      }
       .confirm {
-        min-width: 130px;
-        height: 40px;
-        font-size: 16px;
+		span{
+          background-color: #888;
+          color: $basics-white-color;
+		}
       }
     }
   }

@@ -82,3 +82,10 @@
 @mixin stroke_color{
 
 }
+/*整体剧中 - 上下左右居中*/
+@mixin overall_centring{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
