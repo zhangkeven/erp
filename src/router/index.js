@@ -14,6 +14,8 @@ import UserRole from '@/pages/UserRole/Index.vue'
 import UserRoleAdd from '@/pages/UserRole/UserRoleAdd.vue'
 import User from '@/pages/User/Index.vue'
 import UserAdd from '@/pages/User/UserAdd.vue'
+import globalDataTools from '@/util/globalData/globalDataTools'
+import  Storage from '@/util/setStorage'
 Vue.use(VueRouter)
 
 const routes = [{
@@ -107,19 +109,15 @@ const router = new VueRouter({
 
 // // 导航守卫
 // // 使用 router.beforeEach 注册一个全局前置守卫，判断用户是否登陆
-// router.beforeEach((to, from, next) => {
-// 	if (to.path === '/login') {
-// 	next();
-// } else {
-// 	let token = localStorage.getItem('Authorization');
-//
-// 	if (token === 'null' || token === '') {
-// 		next('/login');
-// 	} else {
-// 		next();
-// 	}
-// }
-// });
+router.beforeEach((to, from, next) => {
+	// let storage = new Storage();
+	// 	// const Token = storage.getItem('Token')
+	// 	// if(Token==false){
+	// 	// 	next('/');
+	// 	// 	return
+	// 	// }
+	next();
+});
 
 // // 添加请求拦截器，在请求头中加token
 // axios.interceptors.request.use(

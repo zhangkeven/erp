@@ -8,6 +8,7 @@ class globalDataTools {
   constructor(){}
   // 存入globalData
   static setGlobalData(key, value){
+    console.log(key,value);
     window.globalData[key] = value
   }
   // 取出

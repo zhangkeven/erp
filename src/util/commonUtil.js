@@ -1,5 +1,13 @@
 import $store from "@/store/index";
-class commonUtil{
+class CommonUtil{
+	//深拷贝
+	static extend(target, sources) {
+		target = JSON.parse(JSON.stringify(target))
+		for (let k in sources) {
+			target[k] = typeof sources[k] === 'object' ? CommonUtil.extend(sources[k]) : sources[k]
+		}
+		return target
+	}
 	//修改主题色
 	static setThemeColor(themeColor){
 		$store.commit('SAVE',{ //修改主题色
@@ -27,5 +35,6 @@ class commonUtil{
 		document.getElementsByTagName('body')[0].style.setProperty('--first-color', firstColor) //css主题色
 		document.getElementsByTagName('body')[0].style.setProperty('--second-color', secondColor)
 	}
+
 }
-export default commonUtil
+export default CommonUtil

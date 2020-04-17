@@ -7,9 +7,11 @@ import $store from '../store'
 import zlDialog from '../components/extends/zlDialog'
 import zlLoading from '../components/extends/loading'
 import zlToast from '../components/extends/zlToast'
+import  Storage from '@/util/setStorage'
+import CommonUtil from '@/util/commonUtil';
 /**
  * @author jm
- * @create 2019-05-07 11:11
+ * @create
  * @desc   Promise封装ajax
  */
 class AxiosUtil {
@@ -18,8 +20,10 @@ class AxiosUtil {
     const start_time = new Date().getTime()
 
     const params = this.chooseBaseUrl(options)
+    let filter = CommonUtil.extend({method :'post'}, params)
     return new Promise((resolve, reject) => {
-      axios(params).then(response => {
+      axios(filter).then(response => {
+
         let mdType = 'failed'
         if (response.status === 200) {
           let res = response.data
@@ -35,13 +39,14 @@ class AxiosUtil {
     })
   }
 
-  // 错误信息，全部拦截请求
+  // get请求
   static get(options) {
     const start_time = new Date().getTime()
 
     const params = this.chooseBaseUrl(options)
+    let filter = CommonUtil.extend({method :'get'}, params)
     return new Promise((resolve, reject) => {
-      axios(params).then(response => {
+      axios(filter).then(response => {
         const end_time = new Date().getTime()
         let mdType = 'failed'
         if (response.status === 200) {
@@ -66,19 +71,24 @@ class AxiosUtil {
 		log_url:"http://hmuat.cnzhonglunnet.com/hm.gif",
 		redirect_door:"http://lsuat.cnzhonglunnet.com/"
 	}
-    // const EnvTest = globalDataTools.getGlobalData('EnvTest')
-	const EnvTest = 'uat'
+    const EnvTest = globalDataTools.getGlobalData('EnvTest')
+	// const EnvTest = 'dev'
     let env = options.env || EnvTest
-    // const access_code = '861b09e8-9120-4cf5-9298-2bf29480968d'
-    // options.data.access_code = access_code || ''
+    let storage = new Storage();
+    const Token = storage.getItem('Token')
+    // options.data.Token = Token || ''
     let result = {
       url: apiDoors[options.url],
-      timeout: options.timeout || 20000
+      timeout: options.timeout || 20000,
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',//设置请求头请求格式为JSON
+        'Token':Token?Token:'',
+        // 'access_token': this.token //设置token 其中K名要和后端协调好
+      },
     }
     if (EnvTest == 'pro') {
       return {
         ...result,
-        method: 'post',
         baseURL: urlConfig.API_DOOR,
         data: qs.stringify(options.data)
       }
@@ -86,16 +96,14 @@ class AxiosUtil {
     if (env == 'yapi') {
       return {
         ...result,
-        method: 'get',
         baseURL: baseUrl[env].API_DOOR,
         params: options.data
       }
     } else {
       return {
         ...result,
-        method: 'post',
         baseURL: baseUrl[env].API_DOOR,
-        data: qs.stringify(options.data)
+        data:JSON.stringify(options.data)
       }
     }
   }

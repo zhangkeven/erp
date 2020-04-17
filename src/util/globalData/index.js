@@ -4,6 +4,8 @@
  * @date 2019/12/7
  */
 
-let globalData = {}
+let globalData = {
+    Token:''
+}
 
 export default globalData

@@ -1,4 +1,5 @@
   const apiDoors = {
-	 querySaleRecordForReturn: 'zl.pos.salebill.getpage/1.0.0/action', //销售订单列表 
+      login:'/api/Auth/Login',//登录接口
+      GetMenus:'/api/Menu/GetMenus',//获取菜单接口
   }
   export default apiDoors

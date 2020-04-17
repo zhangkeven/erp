@@ -7,13 +7,18 @@
 <script>
 import HelloWorld from './components/HelloWorld.vue'
 import commonUtil from '@/util/commonUtil'
+import  {switchEnvironment} from  '@/config/sysconfig'
+import globalData from '@/util/globalData'
+import AxiosUtil from '@/util/axiosutil'
 export default {
   name: 'app',
   components: {
     HelloWorld
   },
   created() {
-  	commonUtil.initColor()  //初始化主题色
+      window.globalData = globalData
+      commonUtil.initColor()  //初始化主题色
+      this.setConfig()
   },
   data(){
 	  return{
@@ -21,6 +26,9 @@ export default {
 	  }
   },
   methods:{
+      setConfig(){
+          switchEnvironment('dev')
+      },
 	  // setColor() {
 	  //
 	  // },
