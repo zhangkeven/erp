@@ -15,7 +15,10 @@ export default new Vuex.Store({
   getters,
   actions,
   state,
-  mutations
+  mutations,
+  modules:{
+
+  }
 });
 
 // const store = new Vuex.Store({
