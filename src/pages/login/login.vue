@@ -27,15 +27,11 @@
                 </div>
             </div>
         </div>
-        <div @click="get">
-            获取token
-        </div>
     </div>
 </template>
 
 <script>
     import AxiosUtil from '@/util/axiosutil'
-    import globalDataTools from '@/util/globalData/globalDataTools'
     import Storage from '@/util/setStorage'
 
     export default {
@@ -52,10 +48,6 @@
             }
         },
         methods: {
-            get() {
-                let storage = new Storage();
-                console.log(storage.getItem('Token'))
-            },
             login() {
                 this.$zlLoading('正在登录...')
                 let data = this.loginForm //参数

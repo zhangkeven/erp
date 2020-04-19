@@ -1,5 +1,5 @@
 <template>
-  <div id="zl-loading" v-show="show">
+  <div id="zl-loading" v-if="show">
     <div class="loading-content">
       <i class="el-icon-loading"></i>
       <span class="text">{{loadingText}}</span>

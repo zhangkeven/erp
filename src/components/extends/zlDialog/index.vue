@@ -1,5 +1,5 @@
 <template>
-  <div id="zl-dialog" class="" v-show="show" @click="closeModal">
+  <div id="zl-dialog" class="" v-if="show" @click="closeModal">
     <transition name="zlDialog">
       <div v-if="popupTypeName == 'default'" class="modal" v-show="show">
         <div class="top-title" v-if="topTitle!=''">

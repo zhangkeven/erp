@@ -15,41 +15,43 @@ import UserRoleAdd from '@/pages/UserRole/UserRoleAdd.vue'
 import User from '@/pages/User/Index.vue'
 import UserAdd from '@/pages/User/UserAdd.vue'
 import globalDataTools from '@/util/globalData/globalDataTools'
-import  Storage from '@/util/setStorage'
+import Storage from '@/util/setStorage'
+import zlDialog from '@/components/extends/zlDialog'//弹出框
+
 Vue.use(VueRouter)
 
 const routes = [{
-		path: '/',
-		name: 'login',
-		component: login
-	},
-	{
-		path: '/home',
-		name: 'Home',
-		component: Home
-	},
-	{
-		path: '/main',
-		name: 'main',
-		component: main,
-		children: [
-			//主题色
-			{
-				path: '/setColor',
-				name: 'setColor',
-				component: setColor
-			},
-		    //人员管理
-			{
-				path: '/personnel',
-				name: 'Personnel',
-				component: Personnel
-			},
-			{
-				path: '/personneladd',
-				name: 'PersonnelAdd',
-				component: PersonnelAdd
-			},
+    path: '/',
+    name: 'login',
+    component: login
+},
+    {
+        path: '/home',
+        name: 'Home',
+        component: Home
+    },
+    {
+        path: '/main',
+        name: 'main',
+        component: main,
+        children: [
+            //主题色
+            {
+                path: '/setColor',
+                name: 'setColor',
+                component: setColor
+            },
+            //人员管理
+            {
+                path: '/personnel',
+                name: 'Personnel',
+                component: Personnel
+            },
+            {
+                path: '/personneladd',
+                name: 'PersonnelAdd',
+                component: PersonnelAdd
+            },
 
             //组织架构
             {
@@ -63,60 +65,70 @@ const routes = [{
                 component: OrganAdd
             },
 
-			//职位管理
-			{
-				path: '/job',
-				name: 'Job',
-				component: Job
-			},
-			{
-				path: '/jobadd',
-				name: 'JobAdd',
-				component: JobAdd
-			},
-			//用户管理
-			{
-				path: '/user',
-				name: 'User',
-				component: User
-			},
-			{
-				path: '/useradd',
-				name: 'UserAdd',
-				component: UserAdd
-			},
+            //职位管理
+            {
+                path: '/job',
+                name: 'Job',
+                component: Job
+            },
+            {
+                path: '/jobadd',
+                name: 'JobAdd',
+                component: JobAdd
+            },
+            //用户管理
+            {
+                path: '/user',
+                name: 'User',
+                component: User
+            },
+            {
+                path: '/useradd',
+                name: 'UserAdd',
+                component: UserAdd
+            },
 
-			//  用户角色
-			{
-				path: '/userrole',
-				name: 'UserRole',
-				component: UserRole
-			},
-			{
-				path: '/userroleadd',
-				name: 'UserRoleAdd',
-				component: UserRoleAdd
-			},
-		]
-	},
+            //  用户角色
+            {
+                path: '/userrole',
+                name: 'UserRole',
+                component: UserRole
+            },
+            {
+                path: '/userroleadd',
+                name: 'UserRoleAdd',
+                component: UserRoleAdd
+            },
+        ]
+    },
 ]
 
 const router = new VueRouter({
-	mode: 'history',
-	base: process.env.BASE_URL,
-	routes
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes
 })
 
 // // 导航守卫
 // // 使用 router.beforeEach 注册一个全局前置守卫，判断用户是否登陆
 router.beforeEach((to, from, next) => {
-	// let storage = new Storage();
-	// 	// const Token = storage.getItem('Token')
-	// 	// if(Token==false){
-	// 	// 	next('/');
-	// 	// 	return
-	// 	// }
-	next();
+    let storage = new Storage();
+    let token = storage.getItem('Token')
+    if (to.path == '/') {
+        next()
+    } else {
+        if (token == false) {
+            zlDialog({
+                contentText: '您没有访问权限！请先登录',
+                cancelText: '确定',
+                cancel: () => {//关闭弹出框
+					next('/');
+				}
+            })
+        } else {
+            next()
+        }
+    }
 });
 
 // // 添加请求拦截器，在请求头中加token
