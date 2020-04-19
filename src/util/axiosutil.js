@@ -65,12 +65,6 @@ class AxiosUtil {
 
   // 选择请求路径前缀
   static chooseBaseUrl(options) {
-    const urlConfig = {
-		API_DOOR:"http://posuat.cnzhonglunnet.com/",
-		WS_DOOR:"ws://192.168.1.41:8080/wsms-web/websocket/",
-		log_url:"http://hmuat.cnzhonglunnet.com/hm.gif",
-		redirect_door:"http://lsuat.cnzhonglunnet.com/"
-	}
     const EnvTest = globalDataTools.getGlobalData('EnvTest')
 	// const EnvTest = 'dev'
     let env = options.env || EnvTest
@@ -86,10 +80,10 @@ class AxiosUtil {
         // 'access_token': this.token //设置token 其中K名要和后端协调好
       },
     }
-    if (EnvTest == 'pro') {
+    if (env == 'pro') {
       return {
         ...result,
-        baseURL: urlConfig.API_DOOR,
+        baseURL: baseUrl[env].API_DOOR,
         data: qs.stringify(options.data)
       }
     }
@@ -106,20 +100,6 @@ class AxiosUtil {
         data:JSON.stringify(options.data)
       }
     }
-  }
-
-  // 线上接口埋点
-  static buried(url, interval, status) {
-    url = encodeURIComponent(url)
-    const time = new Date().getTime()
-    const urlConfig = {
-    	API_DOOR:"http://posuat.cnzhonglunnet.com/",
-    	WS_DOOR:"ws://192.168.1.41:8080/wsms-web/websocket/",
-    	log_url:"http://hmuat.cnzhonglunnet.com/hm.gif",
-    	redirect_door:"http://lsuat.cnzhonglunnet.com/"
-    }
-
-    let picPrefix = `${urlConfig.log_url}?type=intfanalysis&source=pos&t=`
   }
 }
 

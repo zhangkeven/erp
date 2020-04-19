@@ -6,16 +6,11 @@
 
 const pro = {
   API_DOOR: 'http://ls.zhonglunnet.com/mt/pos',
-  redirect_door: 'http://ls.zhonglunnet.com/',
-  WS_DOOR: 'ws://ls.zhonglunnet.com/wsms-web/websocket/',
-  log_url:'http://hm.zhonglunnet.com/hm.gif'
 }
 
 
 const dev = {
   API_DOOR: 'http://192.168.1.102:8000',
-  redirect_door: 'http://lsdev.cnzhonglunnet.com/',
-  log_url:'http://hmdev.cnzhonglunnet.com/hm.gif'
 }
 const yapi = {
   API_DOOR: 'http://yapi.cnzhonglunnet.com/mock/564/',
@@ -24,8 +19,6 @@ const yapi = {
 
 const other = {
   API_DOOR: '',
-  redirect_door: '',
-  WS_DOOR: ''
 }
 
 export default { dev, pro,other,yapi }

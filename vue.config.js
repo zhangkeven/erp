@@ -1,4 +1,5 @@
 module.exports = {
+  publicPath: './', // <----这里就是会修改webpack的outPath.publicPat
   //反向代理的配置
   devServer: {
     proxy: {

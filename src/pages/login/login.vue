@@ -53,7 +53,7 @@
                 let data = this.loginForm //参数
                 AxiosUtil.post({
                     url: 'login',
-                    data: data
+                    data: data,
                 }).then(res => {
                     if (res) {
                         let storage = new Storage();
