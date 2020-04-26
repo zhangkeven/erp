@@ -1,52 +1,59 @@
 <template>
     <div id="navmenu">
+
                 <el-menu
                         default-active="2-1"
                         class="el-menu-vertical-demo"
                         @open="handleOpen"
                         @close="handleClose"
+                        @select="select"
                         :background-color="themeColor"
                         text-color="#fff"
-                        active-text-color="#d7e81b">
-                    <el-submenu index="1">
+                        active-text-color="#d7e81b"
+                        :router="true"
+                >
+                    <el-menu-item :index="'/personneladd'">
+                        一级菜单
+                    </el-menu-item>
+                    <el-submenu  v-for="(item,index) in menuList" :key="index" :index="JSON.stringify(index+1)">
                         <template slot="title">
                             <i class="el-icon-document"></i>
-                            <span>订单管理</span>
+                            <span>{{item.MenuName}}</span>
                         </template>
-                        <el-menu-item-group>
-                            <el-menu-item index="1-1"><i class="bot-black-icon"></i>订单列表</el-menu-item>
-                            <el-menu-item index="1-2"><i class="bot-black-icon"></i>未完成订单</el-menu-item>
-                            <el-menu-item index="1-3"><i class="bot-black-icon"></i>进行中订单</el-menu-item>
+                        <el-menu-item-group v-for="(obj,i) in item.Children" :key="i">
+<!--                            <el-menu-item :index="(JSON.stringify(index+1))+'-'+JSON.stringify(i+1)"><i class="bot-black-icon"></i>{{obj.MenuName}}</el-menu-item>-->
+                            <el-menu-item :index="'/personnel'"><i class="bot-black-icon"></i>{{obj.MenuName}}</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
-                    <el-submenu index="2">
-                        <template slot="title">
-                            <i class="el-icon-s-custom"></i>
-                            <span>人员管理</span>
-                        </template>
-                        <el-menu-item-group>
-                            <el-menu-item index="2-1"><i class="bot-black-icon"></i><span @click="goPersonnel">员工管理</span></el-menu-item>
-                            <el-menu-item index="2-2"><i class="bot-black-icon"></i><span @click="goOrgan">组织架构</span></el-menu-item>
-                            <el-menu-item index="2-3"><i class="bot-black-icon"></i><span @click="goJobList">职位管理</span></el-menu-item>
-                        </el-menu-item-group>
-                    </el-submenu>
+<!--                    <el-submenu index="2">-->
+<!--                        <template slot="title">-->
+<!--                            <i class="el-icon-s-custom"></i>-->
+<!--                            <span>人员管理</span>-->
+<!--                        </template>-->
+<!--                        <el-menu-item-group>-->
+<!--                            <el-menu-item index="2-1"><i class="bot-black-icon"></i><span @click="goPersonnel">员工管理</span></el-menu-item>-->
+<!--                            <el-menu-item index="2-2"><i class="bot-black-icon"></i><span @click="goOrgan">组织架构</span></el-menu-item>-->
+<!--                            <el-menu-item index="2-3"><i class="bot-black-icon"></i><span @click="goJobList">职位管理</span></el-menu-item>-->
+<!--                        </el-menu-item-group>-->
+<!--                    </el-submenu>-->
 
-                    <el-submenu index="3">
-                        <template slot="title">
-                            <i class="el-icon-user"></i>
-                            <span>用户管理</span>
-                        </template>
-                        <el-menu-item-group>
-                            <el-menu-item index="3-1"><i class="bot-black-icon"></i><span @click="goUser">用户账号</span></el-menu-item>
-                            <el-menu-item index="3-2"><i class="bot-black-icon"></i><span @click="goUserRole">用户角色</span></el-menu-item>
-                        </el-menu-item-group>
-                    </el-submenu>
+<!--                    <el-submenu index="3">-->
+<!--                        <template slot="title">-->
+<!--                            <i class="el-icon-user"></i>-->
+<!--                            <span>用户管理</span>-->
+<!--                        </template>-->
+<!--                        <el-menu-item-group>-->
+<!--                            <el-menu-item index="3-1"><i class="bot-black-icon"></i><span @click="goUser">用户账号</span></el-menu-item>-->
+<!--                            <el-menu-item index="3-2"><i class="bot-black-icon"></i><span @click="goUserRole">用户角色</span></el-menu-item>-->
+<!--                        </el-menu-item-group>-->
+<!--                    </el-submenu>-->
 
-                    <el-menu-item index="4">
-                        <i class="el-icon-menu"></i>
-                        <span slot="title" @click="goset">修改主题色</span>
-                    </el-menu-item>
+<!--                    <el-menu-item index="4">-->
+<!--                        <i class="el-icon-menu"></i>-->
+<!--                        <span slot="title" @click="goset">修改主题色</span>-->
+<!--                    </el-menu-item>-->
                 </el-menu>
+        <div @click="getMenu()">获取菜单</div>
     </div>
 </template>
 
@@ -54,9 +61,73 @@
 	import {mapState} from 'vuex'
     export default {
         name: "NavMenu",
+        props:{
+            menuList:{
+                type:Array,
+                default:function () {
+                    return [
+                        {
+                            "Id": 1,
+                            "MenuName": "用户管理",
+                            "MenuCode": "UserManagement",
+                            "MenuUrl": "//",
+                            "Depth": "1级",
+                            "ParentId": null,
+                            "Children": [
+                                {
+                                    "Id": 3,
+                                    "MenuName": "员工管理",
+                                    "MenuCode": "EmployeeManagement",
+                                    "MenuUrl": "/UserManagement/EmployeeManagement",
+                                    "Depth": "2级",
+                                    "ParentId": 1,
+                                    "Children": []
+                                }
+                            ]
+                        },
+                        {
+                            "Id": 2,
+                            "MenuName": "权限管理",
+                            "MenuCode": "AuthorityManagement",
+                            "MenuUrl": "//",
+                            "Depth": "1级",
+                            "ParentId": null,
+                            "Children": [
+                                {
+                                    "Id": 4,
+                                    "MenuName": "菜单权限",
+                                    "MenuCode": "MenuAuthority",
+                                    "MenuUrl": "/AuthorityManagement/MenuAuthority",
+                                    "Depth": "2级",
+                                    "ParentId": 2,
+                                    "Children": []
+                                },
+                                {
+                                    "Id": 5,
+                                    "MenuName": "角色权限",
+                                    "MenuCode": "RoleAuthority",
+                                    "MenuUrl": "/AuthorityManagement/RoleAuthority",
+                                    "Depth": "2级",
+                                    "ParentId": 2,
+                                    "Children": []
+                                },
+                                {
+                                    "Id": 6,
+                                    "MenuName": "数据权限",
+                                    "MenuCode": "DataAuthority",
+                                    "MenuUrl": "/AuthorityManagement/DataAuthority",
+                                    "Depth": "2级",
+                                    "ParentId": 2,
+                                    "Children": []
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        },
         data(){
             return{
-
             }
         },
 		computed:{
@@ -67,11 +138,24 @@
 		},
 
         methods: {
+            //获取菜单
+            getMenu(){
+                AxiosUtil.get({
+                    url: 'GetMenus'
+                }).then(res => {
+
+                }).catch(err => {
+
+                })
+            },
             handleOpen(key, keyPath) {
-                console.log(key, keyPath);
+                this.$emit('handleOpen',key,keyPath)
             },
             handleClose(key, keyPath) {
-                console.log(key, keyPath);
+                this.$emit('handleClose',key,keyPath)
+            },
+            select(index,path){
+                this.$emit('select',index,path)
             },
             goPersonnel(){
                 this.$router.push({

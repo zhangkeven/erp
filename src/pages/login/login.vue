@@ -33,77 +33,56 @@
 <script>
     import AxiosUtil from '@/util/axiosutil'
     import Storage from '@/util/setStorage'
-
     export default {
         data() {
             return {
-                // name: '', //用户名
-                // password: '', //密码
                 meberword: false,
                 loginForm: {
                     userName: 'admin',
                     password: '123456'
                 },
-                userToken: ''
             }
         },
         methods: {
-            login() {
-                this.$zlLoading('正在登录...')
-                let data = this.loginForm //参数
-                AxiosUtil.post({
-                    url: 'login',
-                    data: data,
-                }).then(res => {
-                    if (res) {
-                        let storage = new Storage();
-                        storage.setItem({
-                            expires: 20000,//设置过期时间
-                            name: "Token",
-                            value: 'Bearer' + res.Token
-                        })
-                    }
-                    this.$zlLoading.close()
+            //登陆跳转
+            login(){
+            	let _this = this;
+            	if (this.loginForm.username === '' || this.loginForm.password === '') {
+            		setTimeout(()=>{
+            			this.$zlDialog({
+            			  contentText: '账号或密码不能为空！',
+            			  cancelText: '确定',
+            			  cancel: () => {//关闭弹出框
+            			  }
+            			})
 
-                }).catch(err => {
+            		},500)
+            	}else {
+                    this.$zlLoading('正在登录...')
+                    let data = this.loginForm //参数
+                    AxiosUtil.post({
+                        url: 'login',
+                        data: data,
+                    }).then(res => {
+                        if (res) {
+                            let storage = new Storage();
+                            storage.setItem({
+                                expires: 20000000,//设置过期时间
+                                name: "Token",
+                                value: 'Bearer ' + res.Token,
+                            })
+                            this.$router.push({
+                                path:'/main'
+                            })
+                        }
+                        this.$zlLoading.close()
 
-                    this.$zlLoading.close()
-                })
+                    }).catch(err => {
+                        this.$zlLoading.close()
+                    })
+            	}
+
             }
-            // login(){
-            // 	let _this = this;
-            // 	if (this.loginForm.username === '' || this.loginForm.password === '') {
-            // 		setTimeout(()=>{
-            // 			this.$zlDialog({
-            // 			  contentText: '账号或密码不能为空！',
-            // 			  cancelText: '确定',
-            // 			  cancel: () => {//关闭弹出框
-            // 			  }
-            // 			})
-            //
-            // 		},500)
-            // 	}else {
-            // 			    // this.$router.push({
-            // 			    // 	path:'/main'
-            // 			    // })
-            // 		this.axios({
-            // 			method: 'post',
-            // 			url: 'http://192.168.1.102:8000/api/Auth/Login',
-            // 			data: _this.loginForm
-            // 		}).then(res => {
-            // 			console.log(res.data);
-            // 			_this.userToken = 'Bearer ' + res.data.Token;
-            // 			// 将用户token保存到vuex中
-            // 			_this.changeLogin({ Authorization: _this.userToken });
-            // 			//_this.$router.push('/home');
-            // 			alert('登陆成功');
-            // 		}).catch(error => {
-            // 			alert('账号或密码错误');
-            // 			console.log(error);
-            // 		});
-            // 	}
-            //
-            // }
         }
     }
 

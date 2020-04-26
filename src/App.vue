@@ -10,7 +10,6 @@
     import {switchEnvironment} from '@/config/sysconfig'
     import globalData from '@/util/globalData'
     import AxiosUtil from '@/util/axiosutil'
-
     export default {
         name: 'app',
         components: {
@@ -30,9 +29,6 @@
             setConfig() {
                 switchEnvironment('dev')
             },
-            // setColor() {
-            //
-            // },
         }
     }
 </script>

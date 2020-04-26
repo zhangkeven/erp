@@ -28,6 +28,7 @@ class AxiosUtil {
         if (response.status === 200) {
           let res = response.data
           resolve(res)
+
           mdType = 'success'
         } else {
           reject(response.data)
@@ -76,7 +77,8 @@ class AxiosUtil {
       timeout: options.timeout || 20000,
       headers: {
         'Content-Type': 'application/json;charset=UTF-8',//设置请求头请求格式为JSON
-        'Token':Token?Token:'',
+       // 'Token':Token?Token:'',
+         'Authorization':Token?Token:'',
         // 'access_token': this.token //设置token 其中K名要和后端协调好
       },
     }
