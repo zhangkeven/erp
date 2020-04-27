@@ -164,7 +164,7 @@
         },
         data() {
             return {
-                keyList:[]
+                keyList: []
             }
         },
         computed: {
@@ -176,19 +176,20 @@
 
         methods: {
             handleOpen(key, keyPath) {
-                if(key.length===1){
+                if (key.length === 1) {
                     return
                 }
-                this.keyList =keyPath
+                this.keyList = keyPath
                 this.$emit('handleOpen', key, keyPath)
             },
             handleClose(key, keyPath) {
-                for(let i=0;i<this.keyList.length;i++){
-                    if(i>0 && i<3){
+                for (let i = 0; i < this.keyList.length; i++) {
+                    if (i > 0 && i < 3) {
                         let dom = this.keyList[i]
                         this.$refs['menubg'].close(dom)
                     }
                 }
+                this.keyList = []
                 this.$emit('handleClose', key, keyPath)
             },
             select(index, path) {
@@ -197,7 +198,7 @@
             ///测试修改主题色
             goset() {
                 this.$router.push({
-                    path: '/setColor'
+                path: '/setColor'
                 })
             },
         }
@@ -206,40 +207,42 @@
 </script>
 <style lang="scss">
     #navmenu {
-        .el-menu {
-            border: none;
-            padding-top: 15px;
-        }
 
-        .el-submenu .el-menu-item,
-        .el-submenu__title {
-            min-width: auto;
-            font-size: 14px;
-            padding: 0 15px;
-            height: 40px;
-            line-height: 40px;
-        }
+    .el-menu {
+        border: none;
+        padding-top: 15px;
+    }
 
-        .el-submenu .el-menu {
-            padding-top: 0;
-        }
+    .el-submenu .el-menu-item,
+    .el-submenu__title {
+        min-width: auto;
+        font-size: 14px;
+        padding: 0 15px;
+        height: 40px;
+        line-height: 40px;
+    }
 
-        .el-submenu .el-menu-item {
+    .el-submenu .el-menu {
+        padding-top: 0;
+    }
 
-        }
+    .el-submenu .el-menu-item {
 
-        .el-submenu [class^=el-icon-],
-        .el-submenu.is-opened > .el-submenu__title .el-submenu__icon-arrow,
-        .el-submenu__title i {
-            color: #fff;
-            font-size: 16px;
-            margin-right: 5px;
-            width: 24px;
-            line-height: 16px;
-        }
+    }
 
-        .el-menu-item-group__title {
-            display: none;
-        }
+    .el-submenu [class^=el-icon-],
+    .el-submenu.is-opened > .el-submenu__title .el-submenu__icon-arrow,
+    .el-submenu__title i {
+        color: #fff;
+        font-size: 16px;
+        margin-right: 5px;
+        width: 24px;
+        line-height: 16px;
+    }
+
+    .el-menu-item-group__title {
+        display: none;
+    }
+
     }
 </style>
