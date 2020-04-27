@@ -49,30 +49,214 @@
 		data(){
 			return{
 				menuList:[
+				        // 只有一级
 					{
 						"Id": 1,
-						"MenuName": "用户管理",
+						"MenuName": "只有1级",
 						"MenuCode": "UserManagement",
-						"MenuUrl": "//",
+						"MenuUrl": "/personneladd",
 						"Depth": "1级",
 						"ParentId": null,
-					},
+                        'Children':[]
+
+                    },
+                    //有2级
+                    {
+                        "Id": 2,
+                        "MenuName": "含有2级",
+                        "MenuCode": "AuthorityManagement",
+                        "MenuUrl": "/userroleadda",
+                        "Depth": "1级",
+                        "ParentId": null,
+                        "Children": [
+                            {
+                                "Id": 4,
+                                "MenuName": "菜单2级",
+                                "MenuCode": "MenuAuthority",
+                                "MenuUrl": "/userroleedit",
+                                "Depth": "2级",
+                                "ParentId": 2,
+                                "Children": []
+                            },
+                            {
+                                "Id": 5,
+                                "MenuName": "角色权限",
+                                "MenuCode": "RoleAuthority",
+                                "MenuUrl": "/AuthorityManagement/RoleAuthority",
+                                "Depth": "2级",
+                                "ParentId": 2,
+                                "Children": []
+                            },
+                            {
+                                "Id": 6,
+                                "MenuName": "数据权限",
+                                "MenuCode": "DataAuthority",
+                                "MenuUrl": "/AuthorityManagement/DataAuthority",
+                                "Depth": "2级",
+                                "ParentId": 2,
+                                "Children": []
+                            }
+                        ]
+                    },
+                    {
+                        "Id": 1,
+                        "MenuName": "只有1级",
+                        "MenuCode": "UserManagement",
+                        "MenuUrl": "/personneladd",
+                        "Depth": "1级",
+                        "ParentId": null,
+                        'Children':[]
+
+                    },
+                    //有3级
+                    {
+                        "Id": 2,
+                        "MenuName": "含有3级",
+                        "MenuCode": "AuthorityManagementa",
+                        "MenuUrl": "/userroleaddb",
+                        "Depth": "1级",
+                        "ParentId": null,
+                        "Children": [
+                            {
+                                "Id": 4,
+                                "MenuName": "菜单2级",
+                                "MenuCode": "MenuAuthority",
+                                "MenuUrl": "/userroleedita",
+                                "Depth": "2级",
+                                "ParentId": 2,
+                                "Children": [
+                                    {
+                                        "Id": 4,
+                                        "MenuName": "菜单3级",
+                                        "MenuCode": "MenuAuthority",
+                                        "MenuUrl": "/userroledetails",
+                                        "Depth": "2级",
+                                        "ParentId": 2,
+                                        "Children": []
+                                    },
+                                    {
+                                        "Id": 5,
+                                        "MenuName": "角色权限",
+                                        "MenuCode": "RoleAuthority",
+                                        "MenuUrl": "/AuthorityManagement/RoleAuthority",
+                                        "Depth": "2级",
+                                        "ParentId": 2,
+                                        "Children": []
+                                    },
+                                    {
+                                        "Id": 6,
+                                        "MenuName": "数据权限",
+                                        "MenuCode": "DataAuthority",
+                                        "MenuUrl": "/AuthorityManagement/DataAuthority",
+                                        "Depth": "2级",
+                                        "ParentId": 2,
+                                        "Children": []
+                                    }
+                                ]
+                            },
+                            {
+                                "Id": 5,
+                                "MenuName": "角色权限",
+                                "MenuCode": "RoleAuthority",
+                                "MenuUrl": "/AuthorityManagement/RoleAuthority",
+                                "Depth": "2级",
+                                "ParentId": 2,
+                                "Children": []
+                            },
+                            {
+                                "Id": 6,
+                                "MenuName": "数据权限",
+                                "MenuCode": "DataAuthority",
+                                "MenuUrl": "/AuthorityManagement/DataAuthority",
+                                "Depth": "2级",
+                                "ParentId": 2,
+                                "Children": []
+                            }
+                        ]
+                    },
+                    {
+                        "Id": 1,
+                        "MenuName": "只有1级",
+                        "MenuCode": "UserManagement",
+                        "MenuUrl": "/personneladd",
+                        "Depth": "1级",
+                        "ParentId": null,
+                        'Children':[]
+
+                    },
+                    //有4级
 					{
 						"Id": 2,
-						"MenuName": "权限管理",
+						"MenuName": "含有4级",
 						"MenuCode": "AuthorityManagement",
-						"MenuUrl": "//",
+						"MenuUrl": "/userroleaddc",
 						"Depth": "1级",
 						"ParentId": null,
 						"Children": [
 							{
 								"Id": 4,
-								"MenuName": "菜单权限",
+								"MenuName": "菜单2级",
 								"MenuCode": "MenuAuthority",
-								"MenuUrl": "/AuthorityManagement/MenuAuthority",
+								"MenuUrl": "/userroleeditb",
 								"Depth": "2级",
 								"ParentId": 2,
-								"Children": []
+                                "Children": [
+                                    {
+                                        "Id": 4,
+                                        "MenuName": "菜单3级",
+                                        "MenuCode": "MenuAuthority",
+                                        "MenuUrl": "/userroledetails",
+                                        "Depth": "2级",
+                                        "ParentId": 2,
+                                        "Children": [
+                                            {
+                                                "Id": 4,
+                                                "MenuName": "菜单4级",
+                                                "MenuCode": "MenuAuthority",
+                                                "MenuUrl": "/userrole",
+                                                "Depth": "2级",
+                                                "ParentId": 2,
+                                                "Children": []
+                                            },
+                                            {
+                                                "Id": 5,
+                                                "MenuName": "角色权限",
+                                                "MenuCode": "RoleAuthority",
+                                                "MenuUrl": "/AuthorityManagement/RoleAuthority",
+                                                "Depth": "2级",
+                                                "ParentId": 2,
+                                                "Children": []
+                                            },
+                                            {
+                                                "Id": 6,
+                                                "MenuName": "数据权限",
+                                                "MenuCode": "DataAuthority",
+                                                "MenuUrl": "/AuthorityManagement/DataAuthority",
+                                                "Depth": "2级",
+                                                "ParentId": 2,
+                                                "Children": []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "Id": 5,
+                                        "MenuName": "角色权限",
+                                        "MenuCode": "RoleAuthority",
+                                        "MenuUrl": "/AuthorityManagement/RoleAuthority",
+                                        "Depth": "2级",
+                                        "ParentId": 2,
+                                        "Children": []
+                                    },
+                                    {
+                                        "Id": 6,
+                                        "MenuName": "数据权限",
+                                        "MenuCode": "DataAuthority",
+                                        "MenuUrl": "/AuthorityManagement/DataAuthority",
+                                        "Depth": "2级",
+                                        "ParentId": 2,
+                                        "Children": []
+                                    }
+                                ]
 							},
 							{
 								"Id": 5,

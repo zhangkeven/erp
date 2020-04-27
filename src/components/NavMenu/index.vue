@@ -1,71 +1,130 @@
 <template>
     <div id="navmenu">
 
-                <el-menu
-                        default-active="2-1"
-                        class="el-menu-vertical-demo"
-                        @open="handleOpen"
-                        @close="handleClose"
-                        @select="select"
-                        :background-color="themeColor"
-                        text-color="#fff"
-                        active-text-color="#d7e81b"
-                        :router="true"
-                >
-                    <el-menu-item :index="'/personneladd'">
-                        一级菜单
-                    </el-menu-item>
-                    <el-submenu  v-for="(item,index) in menuList" :key="index" :index="JSON.stringify(index+1)">
-                        <template slot="title">
-                            <i class="el-icon-document"></i>
-                            <span>{{item.MenuName}}</span>
-                        </template>
-                        <el-menu-item-group v-for="(obj,i) in item.Children" :key="i">
-<!--                            <el-menu-item :index="(JSON.stringify(index+1))+'-'+JSON.stringify(i+1)"><i class="bot-black-icon"></i>{{obj.MenuName}}</el-menu-item>-->
-                            <el-menu-item :index="'/personnel'"><i class="bot-black-icon"></i>{{obj.MenuName}}</el-menu-item>
-                        </el-menu-item-group>
-                    </el-submenu>
-<!--                    <el-submenu index="2">-->
-<!--                        <template slot="title">-->
-<!--                            <i class="el-icon-s-custom"></i>-->
-<!--                            <span>人员管理</span>-->
-<!--                        </template>-->
-<!--                        <el-menu-item-group>-->
-<!--                            <el-menu-item index="2-1"><i class="bot-black-icon"></i><span @click="goPersonnel">员工管理</span></el-menu-item>-->
-<!--                            <el-menu-item index="2-2"><i class="bot-black-icon"></i><span @click="goOrgan">组织架构</span></el-menu-item>-->
-<!--                            <el-menu-item index="2-3"><i class="bot-black-icon"></i><span @click="goJobList">职位管理</span></el-menu-item>-->
-<!--                        </el-menu-item-group>-->
-<!--                    </el-submenu>-->
+        <el-menu
+                default-active="2-1"
+                class="el-menu-vertical-demo"
+                @open="handleOpen"
+                @close="handleClose"
+                @select="select"
+                :background-color="themeColor"
+                text-color="#fff"
+                active-text-color="#d7e81b"
+                :router="true"
+        >
+            <div v-for="(firstItem,firsIndex) in menuList" :key="firsIndex">
+<!--                只有一级的模版-->
+                <el-menu-item
+                        :index="'/personneladd'"
+                        v-if="firstItem.Children.length===0">
+                    <i class="el-icon-menu"></i>
+                    <span slot="title">{{firstItem.MenuName}}</span>
+                </el-menu-item>
+<!--                有多级的模版-->
+                <el-submenu
+                        :index="firstItem.MenuUrl"
+                        v-if="firstItem.Children.length>0">
+                    <template slot="title">
+                        <i class="el-icon-document"></i>
+                        <span>{{firstItem.MenuName}}</span>
+                    </template>
+                    <el-menu-item-group
+                            v-for="(secondItem,secondIndex) in firstItem.Children"
+                            :key="secondIndex">
+<!--                        二级下没有三级了-->
+                        <el-menu-item :index="secondItem.MenuUrl" v-if="secondItem.Children.length===0">
+                            <i class="bot-black-icon"></i>{{secondItem.MenuName}}
+                        </el-menu-item>
+<!--                        二级下面有三级-->
+                        <el-submenu
+                                :index="secondItem.MenuUrl"
+                                v-if="secondItem.Children.length>0">
+                            <template slot="title">
+                                <i class="el-icon-document"></i>
+                                <span>{{secondItem.MenuName}}</span>
+                            </template>
+                            <el-menu-item-group
+                                    v-for="(thirdItem,thirdIndex) in secondItem.Children"
+                                    :key="thirdIndex">
+                                <!--                        三级下面没有四级了-->
+                                <el-menu-item :index="thirdItem.MenuUrl" v-if="thirdItem.Children.length===0">
+                                    <i class="bot-black-icon"></i>{{thirdItem.MenuName}}
+                                </el-menu-item>
+<!--                                 三级下面有四级   -->
+                                <el-submenu
+                                        :index="thirdItem.MenuUrl"
+                                        v-if="thirdItem.Children.length>0">
+                                    <template slot="title">
+                                        <i class="el-icon-document"></i>
+                                        <span>{{thirdItem.MenuName}}</span>
+                                    </template>
+                                    <el-menu-item-group
+                                            v-for="(fourItem,fourIndex) in thirdItem.Children"
+                                            :key="fourIndex">
+                                        <el-menu-item :index="fourItem.MenuUrl" v-if="fourItem.Children.length===0">
+                                            <i class="bot-black-icon"></i>{{fourItem.MenuName}}
+                                        </el-menu-item>
+                                    </el-menu-item-group>
+                                </el-submenu>
+                            </el-menu-item-group>
+                        </el-submenu>
+                    </el-menu-item-group>
+                </el-submenu>
 
-<!--                    <el-submenu index="3">-->
-<!--                        <template slot="title">-->
-<!--                            <i class="el-icon-user"></i>-->
-<!--                            <span>用户管理</span>-->
-<!--                        </template>-->
-<!--                        <el-menu-item-group>-->
-<!--                            <el-menu-item index="3-1"><i class="bot-black-icon"></i><span @click="goUser">用户账号</span></el-menu-item>-->
-<!--                            <el-menu-item index="3-2"><i class="bot-black-icon"></i><span @click="goUserRole">用户角色</span></el-menu-item>-->
-<!--                        </el-menu-item-group>-->
-<!--                    </el-submenu>-->
 
-<!--                    <el-menu-item index="4">-->
-<!--                        <i class="el-icon-menu"></i>-->
-<!--                        <span slot="title" @click="goset">修改主题色</span>-->
-<!--                    </el-menu-item>-->
-                </el-menu>
+            </div>
+
+            <!--                    <el-submenu index="2">-->
+            <!--                        <template slot="title">-->
+            <!--                            <i class="el-icon-s-custom"></i>-->
+            <!--                            <span>人员管理</span>-->
+            <!--                        </template>-->
+            <!--                        <el-menu-item-group>-->
+            <!--                            <el-menu-item index="2-1"><i class="bot-black-icon"></i><span @click="goPersonnel">员工管理</span></el-menu-item>-->
+            <!--                            <el-menu-item index="2-2"><i class="bot-black-icon"></i><span @click="goOrgan">组织架构</span></el-menu-item>-->
+            <!--                            <el-menu-item index="2-3"><i class="bot-black-icon"></i><span @click="goJobList">职位管理</span></el-menu-item>-->
+            <!--                        </el-menu-item-group>-->
+            <!--                    </el-submenu>-->
+
+            <!--                    <el-submenu index="3">-->
+            <!--                        <template slot="title">-->
+            <!--                            <i class="el-icon-user"></i>-->
+            <!--                            <span>用户管理</span>-->
+            <!--                        </template>-->
+            <!--                        <el-menu-item-group>-->
+            <!--                            <el-menu-item index="3-1"><i class="bot-black-icon"></i><span @click="goUser">用户账号</span></el-menu-item>-->
+            <!--                            <el-menu-item index="3-2"><i class="bot-black-icon"></i><span @click="goUserRole">用户角色</span></el-menu-item>-->
+            <!--                        </el-menu-item-group>-->
+            <!--                    </el-submenu>-->
+
+            <!--                    <el-menu-item index="4">-->
+            <!--                        <i class="el-icon-menu"></i>-->
+            <!--                        <span slot="title" @click="goset">修改主题色</span>-->
+            <!--                    </el-menu-item>-->
+        </el-menu>
         <div @click="getMenu()">获取菜单</div>
     </div>
 </template>
 
 <script>
-	import {mapState} from 'vuex'
+    import {mapState} from 'vuex'
+
     export default {
         name: "NavMenu",
-        props:{
-            menuList:{
-                type:Array,
-                default:function () {
+        props: {
+            menuList: {
+                type: Array,
+                default: function () {
                     return [
+                        {
+                            "Id": 1,
+                            "MenuName": "用户管理",
+                            "MenuCode": "UserManagement",
+                            "MenuUrl": "//",
+                            "Depth": "1级",
+                            "ParentId": null,
+                            'Children': []
+                        },
                         {
                             "Id": 1,
                             "MenuName": "用户管理",
@@ -126,20 +185,19 @@
                 }
             }
         },
-        data(){
-            return{
-            }
+        data() {
+            return {}
         },
-		computed:{
-			...mapState({
-				themeColor:state=>state.setcolor.themeColor
+        computed: {
+            ...mapState({
+                themeColor: state => state.setcolor.themeColor
 
-			})
-		},
+            })
+        },
 
         methods: {
             //获取菜单
-            getMenu(){
+            getMenu() {
                 AxiosUtil.get({
                     url: 'GetMenus'
                 }).then(res => {
@@ -149,43 +207,43 @@
                 })
             },
             handleOpen(key, keyPath) {
-                this.$emit('handleOpen',key,keyPath)
+                this.$emit('handleOpen', key, keyPath)
             },
             handleClose(key, keyPath) {
-                this.$emit('handleClose',key,keyPath)
+                this.$emit('handleClose', key, keyPath)
             },
-            select(index,path){
-                this.$emit('select',index,path)
+            select(index, path) {
+                this.$emit('select', index, path)
             },
-            goPersonnel(){
+            goPersonnel() {
                 this.$router.push({
-                    path:'/personnel'
+                    path: '/personnel'
                 })
             },
-            goOrgan(){
+            goOrgan() {
                 this.$router.push({
-                    path:'/organ'
+                    path: '/organ'
                 })
             },
-            goJobList(){
+            goJobList() {
                 this.$router.push({
-                    path:'/job'
+                    path: '/job'
                 })
             },
-            goUser(){
+            goUser() {
                 this.$router.push({
-                    path:'/user'
+                    path: '/user'
                 })
             },
-            goUserRole(){
+            goUserRole() {
                 this.$router.push({
-                    path:'/userrole'
+                    path: '/userrole'
                 })
             },
             ///测试修改主题色
-            goset(){
+            goset() {
                 this.$router.push({
-                    path:'/setColor'
+                    path: '/setColor'
                 })
             },
         }
@@ -193,35 +251,40 @@
     }
 </script>
 <style lang="scss">
-    #navmenu{
-        .el-menu{
+    #navmenu {
+        .el-menu {
             border: none;
             padding-top: 15px;
         }
+
         .el-submenu .el-menu-item,
-        .el-submenu__title{
+        .el-submenu__title {
             min-width: auto;
             font-size: 14px;
             padding: 0 15px;
             height: 40px;
             line-height: 40px;
         }
-        .el-submenu .el-menu{
+
+        .el-submenu .el-menu {
             padding-top: 0;
         }
-        .el-submenu .el-menu-item{
+
+        .el-submenu .el-menu-item {
 
         }
+
         .el-submenu [class^=el-icon-],
-        .el-submenu.is-opened>.el-submenu__title .el-submenu__icon-arrow,
-        .el-submenu__title i{
+        .el-submenu.is-opened > .el-submenu__title .el-submenu__icon-arrow,
+        .el-submenu__title i {
             color: #fff;
             font-size: 16px;
             margin-right: 5px;
             width: 24px;
             line-height: 16px;
         }
-        .el-menu-item-group__title{
+
+        .el-menu-item-group__title {
             display: none;
         }
     }

@@ -171,23 +171,25 @@ const router = new VueRouter({
 // 导航守卫
 // 使用 router.beforeEach 注册一个全局前置守卫，判断用户是否登陆
 router.beforeEach((to, from, next) => {
-    let storage = new Storage();
-    let token = storage.getItem('Token')
-    if (to.path == '/') {
-        next();
-    } else {
-        if (token == false) {
-            zlDialog({
-                contentText: '您没有访问权限！请先登录',
-                cancelText: '确定',
-                cancel: () => {//关闭弹出框
-					next("/");
-				}
-            })
-        } else {
-            next();
-        }
-    }
+    next();
+
+    // let storage = new Storage();
+    // let token = storage.getItem('Token')
+    // if (to.path == '/') {
+    //     next();
+    // } else {
+    //     if (token == false) {
+    //         zlDialog({
+    //             contentText: '您没有访问权限！请先登录',
+    //             cancelText: '确定',
+    //             cancel: () => {//关闭弹出框
+	// 				next("/");
+	// 			}
+    //         })
+    //     } else {
+    //         next();
+    //     }
+    // }
 })
 
 export default router
