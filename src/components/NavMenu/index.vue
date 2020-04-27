@@ -11,11 +11,12 @@
                 text-color="#fff"
                 active-text-color="#d7e81b"
                 :router="true"
+                ref="menubg"
         >
             <div v-for="(firstItem,firsIndex) in menuList" :key="firsIndex">
                 <!--                只有一级的模版-->
                 <el-menu-item
-                        :index="'/personneladd'"
+                        :index="firstItem.MenuUrl"
                         v-if="firstItem.Children.length===0">
                     <i class="el-icon-menu"></i>
                     <span slot="title">{{firstItem.MenuName}}</span>
@@ -23,14 +24,18 @@
                 <!--                有多级的模版-->
                 <el-submenu
                         :index="firstItem.MenuUrl"
-                        v-if="firstItem.Children.length>0">
+                        v-if="firstItem.Children.length>0"
+                >
                     <template slot="title">
                         <i class="el-icon-document"></i>
                         <span>{{firstItem.MenuName}}</span>
                     </template>
                     <el-menu-item-group
                             v-for="(secondItem,secondIndex) in firstItem.Children"
-                            :key="secondIndex">
+                            :key="secondIndex"
+                            :ref="secondItem.MenuUrl"
+
+                    >
                         <!--                        二级下没有三级了-->
                         <el-menu-item :index="secondItem.MenuUrl" v-if="secondItem.Children.length===0">
                             <i class="bot-black-icon"></i>{{secondItem.MenuName}}
@@ -45,7 +50,10 @@
                             </template>
                             <el-menu-item-group
                                     v-for="(thirdItem,thirdIndex) in secondItem.Children"
-                                    :key="thirdIndex">
+                                    :key="thirdIndex"
+                                    :ref="thirdItem.MenuUrl"
+
+                            >
                                 <!--                        三级下面没有四级了-->
                                 <el-menu-item :index="thirdItem.MenuUrl" v-if="thirdItem.Children.length===0">
                                     <i class="bot-black-icon"></i>{{thirdItem.MenuName}}
@@ -155,7 +163,9 @@
             }
         },
         data() {
-            return {}
+            return {
+                keyList:[]
+            }
         },
         computed: {
             ...mapState({
@@ -166,9 +176,19 @@
 
         methods: {
             handleOpen(key, keyPath) {
+                if(key.length===1){
+                    return
+                }
+                this.keyList =keyPath
                 this.$emit('handleOpen', key, keyPath)
             },
             handleClose(key, keyPath) {
+                for(let i=0;i<this.keyList.length;i++){
+                    if(i>0 && i<3){
+                        let dom = this.keyList[i]
+                        this.$refs['menubg'].close(dom)
+                    }
+                }
                 this.$emit('handleClose', key, keyPath)
             },
             select(index, path) {

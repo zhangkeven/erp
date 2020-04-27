@@ -296,10 +296,10 @@
 				})
 			},
 			handleOpen(key, keyPath) {
-				// console.log('handleOpen',key,keyPath)
+				console.log('handleOpen',key,keyPath)
 			},
 			handleClose(key, keyPath) {
-				// console.log('handleClose',key,keyPath)
+				console.log('handleClose',key,keyPath)
 			},
 			select(index,path){
 				console.log('selectindex',index,'selectpath',path)
