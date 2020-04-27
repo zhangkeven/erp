@@ -315,5 +315,9 @@
 	}
 	.aside-wrap{
 		width: 180px !important;
+        overflow: hidden !important;
+        &:hover{
+            overflow: auto !important;
+        }
 	}
 </style>

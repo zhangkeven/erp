@@ -183,7 +183,10 @@
     flex: 1;
     height: 100%;
     margin:0 15px;
-    overflow-y: auto;
+    overflow-y: hidden;
+    &:hover{
+      overflow-y: auto;
+    }
   }
 }
 /*左侧边栏*/
