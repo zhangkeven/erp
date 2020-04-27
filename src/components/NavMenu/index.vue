@@ -13,14 +13,14 @@
                 :router="true"
         >
             <div v-for="(firstItem,firsIndex) in menuList" :key="firsIndex">
-<!--                只有一级的模版-->
+                <!--                只有一级的模版-->
                 <el-menu-item
                         :index="'/personneladd'"
                         v-if="firstItem.Children.length===0">
                     <i class="el-icon-menu"></i>
                     <span slot="title">{{firstItem.MenuName}}</span>
                 </el-menu-item>
-<!--                有多级的模版-->
+                <!--                有多级的模版-->
                 <el-submenu
                         :index="firstItem.MenuUrl"
                         v-if="firstItem.Children.length>0">
@@ -31,11 +31,11 @@
                     <el-menu-item-group
                             v-for="(secondItem,secondIndex) in firstItem.Children"
                             :key="secondIndex">
-<!--                        二级下没有三级了-->
+                        <!--                        二级下没有三级了-->
                         <el-menu-item :index="secondItem.MenuUrl" v-if="secondItem.Children.length===0">
                             <i class="bot-black-icon"></i>{{secondItem.MenuName}}
                         </el-menu-item>
-<!--                        二级下面有三级-->
+                        <!--                        二级下面有三级-->
                         <el-submenu
                                 :index="secondItem.MenuUrl"
                                 v-if="secondItem.Children.length>0">
@@ -50,7 +50,7 @@
                                 <el-menu-item :index="thirdItem.MenuUrl" v-if="thirdItem.Children.length===0">
                                     <i class="bot-black-icon"></i>{{thirdItem.MenuName}}
                                 </el-menu-item>
-<!--                                 三级下面有四级   -->
+                                <!--                                 三级下面有四级   -->
                                 <el-submenu
                                         :index="thirdItem.MenuUrl"
                                         v-if="thirdItem.Children.length>0">
@@ -70,39 +70,8 @@
                         </el-submenu>
                     </el-menu-item-group>
                 </el-submenu>
-
-
             </div>
-
-            <!--                    <el-submenu index="2">-->
-            <!--                        <template slot="title">-->
-            <!--                            <i class="el-icon-s-custom"></i>-->
-            <!--                            <span>人员管理</span>-->
-            <!--                        </template>-->
-            <!--                        <el-menu-item-group>-->
-            <!--                            <el-menu-item index="2-1"><i class="bot-black-icon"></i><span @click="goPersonnel">员工管理</span></el-menu-item>-->
-            <!--                            <el-menu-item index="2-2"><i class="bot-black-icon"></i><span @click="goOrgan">组织架构</span></el-menu-item>-->
-            <!--                            <el-menu-item index="2-3"><i class="bot-black-icon"></i><span @click="goJobList">职位管理</span></el-menu-item>-->
-            <!--                        </el-menu-item-group>-->
-            <!--                    </el-submenu>-->
-
-            <!--                    <el-submenu index="3">-->
-            <!--                        <template slot="title">-->
-            <!--                            <i class="el-icon-user"></i>-->
-            <!--                            <span>用户管理</span>-->
-            <!--                        </template>-->
-            <!--                        <el-menu-item-group>-->
-            <!--                            <el-menu-item index="3-1"><i class="bot-black-icon"></i><span @click="goUser">用户账号</span></el-menu-item>-->
-            <!--                            <el-menu-item index="3-2"><i class="bot-black-icon"></i><span @click="goUserRole">用户角色</span></el-menu-item>-->
-            <!--                        </el-menu-item-group>-->
-            <!--                    </el-submenu>-->
-
-            <!--                    <el-menu-item index="4">-->
-            <!--                        <i class="el-icon-menu"></i>-->
-            <!--                        <span slot="title" @click="goset">修改主题色</span>-->
-            <!--                    </el-menu-item>-->
         </el-menu>
-        <div @click="getMenu()">获取菜单</div>
     </div>
 </template>
 
@@ -196,16 +165,6 @@
         },
 
         methods: {
-            //获取菜单
-            getMenu() {
-                AxiosUtil.get({
-                    url: 'GetMenus'
-                }).then(res => {
-
-                }).catch(err => {
-
-                })
-            },
             handleOpen(key, keyPath) {
                 this.$emit('handleOpen', key, keyPath)
             },
@@ -214,31 +173,6 @@
             },
             select(index, path) {
                 this.$emit('select', index, path)
-            },
-            goPersonnel() {
-                this.$router.push({
-                    path: '/personnel'
-                })
-            },
-            goOrgan() {
-                this.$router.push({
-                    path: '/organ'
-                })
-            },
-            goJobList() {
-                this.$router.push({
-                    path: '/job'
-                })
-            },
-            goUser() {
-                this.$router.push({
-                    path: '/user'
-                })
-            },
-            goUserRole() {
-                this.$router.push({
-                    path: '/userrole'
-                })
             },
             ///测试修改主题色
             goset() {
