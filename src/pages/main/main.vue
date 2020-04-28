@@ -39,7 +39,7 @@
     import Footer from '@/components/Footer/index.vue'
     import AxiosUtil from '@/util/axiosutil'
     import {mapMutations} from 'vuex'
-    import  CommonUtil from '@/util/commonUtil'
+    import menuPath from "@/config/menuPath";
     export default {
         name: "Main",
         components: {
@@ -294,15 +294,41 @@
             initPage(){
                 if(this.level===1){
                     this.selectMenu = this.menuList[0]
+                    let id = this.menuList[0].Id
+                    this.$router.push({
+                        path:menuPath[id],
+                        query:{
+
+                        }
+                    })
+                    this.$forceUpdate()
                     return;
                 }
                 if(this.level===2){
-                    if(this.menuList[0].Children>0){ //自定义了2级  并且第一个有2级菜单
+
+                    if(this.menuList[0].Children.length>0){ //自定义了2级  并且第一个有2级菜单
                         this.selectMenu = this.menuList[0].Children[0]
+                        let id = this.menuList[0].Children[0].Id
+                        this.$router.push({
+                            path:menuPath[id],
+                            query:{
+
+                            }
+                        })
+                        this.$forceUpdate()
+
                         return
                     }
-                    if(this.menuList[0].Children===0){ //自定义了2级  并且第一个没有2级菜单
+                    if(this.menuList[0].Children.length===0){ //自定义了2级  并且第一个没有2级菜单
                         this.selectMenu = this.menuList[0]
+                        let id = this.menuList[0].Id
+                        this.$router.push({
+                            path:menuPath[id],
+                            query:{
+
+                            }
+                        })
+                        this.$forceUpdate()
                         return
                     }
                     return
