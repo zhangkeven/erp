@@ -10,20 +10,19 @@
                 :background-color="themeColor"
                 text-color="#fff"
                 active-text-color="#d7e81b"
-                :router="true"
                 ref="menubg"
         >
             <div v-for="(firstItem,firsIndex) in menuList" :key="firsIndex">
                 <!--                只有一级的模版-->
                 <el-menu-item
-                        :index="firstItem.MenuUrl"
+                        :index="JSON.stringify(firstItem.Id)"
                         v-if="firstItem.Children.length===0">
                     <i class="el-icon-menu"></i>
                     <span slot="title">{{firstItem.MenuName}}</span>
                 </el-menu-item>
                 <!--                有多级的模版-->
                 <el-submenu
-                        :index="firstItem.MenuUrl"
+                        :index="JSON.stringify(firstItem.Id)"
                         v-if="firstItem.Children.length>0"
                 >
                     <template slot="title">
@@ -33,17 +32,16 @@
                     <el-menu-item-group
                             v-for="(secondItem,secondIndex) in firstItem.Children"
                             :key="secondIndex"
-                            :ref="secondItem.MenuUrl"
 
                     >
                         <!--                        二级下没有三级了-->
-                        <el-menu-item :index="secondItem.MenuUrl" v-if="secondItem.Children.length===0">
+                        <el-menu-item :index="JSON.stringify(secondItem.Id)" v-if="secondItem.Children.length===0 || level===2">
                             <i class="bot-black-icon"></i>{{secondItem.MenuName}}
                         </el-menu-item>
                         <!--                        二级下面有三级-->
                         <el-submenu
-                                :index="secondItem.MenuUrl"
-                                v-if="secondItem.Children.length>0">
+                                :index="JSON.stringify(secondItem.Id)"
+                                v-if="secondItem.Children.length>0 && level>2">
                             <template slot="title">
                                 <i class="el-icon-document"></i>
                                 <span>{{secondItem.MenuName}}</span>
@@ -51,17 +49,16 @@
                             <el-menu-item-group
                                     v-for="(thirdItem,thirdIndex) in secondItem.Children"
                                     :key="thirdIndex"
-                                    :ref="thirdItem.MenuUrl"
 
                             >
                                 <!--                        三级下面没有四级了-->
-                                <el-menu-item :index="thirdItem.MenuUrl" v-if="thirdItem.Children.length===0">
+                                <el-menu-item :index="JSON.stringify(thirdItem.Id)" v-if="thirdItem.Children.length===0 || level===3">
                                     <i class="bot-black-icon"></i>{{thirdItem.MenuName}}
                                 </el-menu-item>
                                 <!--                                 三级下面有四级   -->
                                 <el-submenu
-                                        :index="thirdItem.MenuUrl"
-                                        v-if="thirdItem.Children.length>0">
+                                        :index="JSON.stringify(thirdItem.Id)"
+                                        v-if="thirdItem.Children.length>0 && level>3">
                                     <template slot="title">
                                         <i class="el-icon-document"></i>
                                         <span>{{thirdItem.MenuName}}</span>
@@ -69,7 +66,7 @@
                                     <el-menu-item-group
                                             v-for="(fourItem,fourIndex) in thirdItem.Children"
                                             :key="fourIndex">
-                                        <el-menu-item :index="fourItem.MenuUrl" v-if="fourItem.Children.length===0">
+                                        <el-menu-item :index="JSON.stringify(fourItem.Id)" v-if="fourItem.Children.length===0">
                                             <i class="bot-black-icon"></i>{{fourItem.MenuName}}
                                         </el-menu-item>
                                     </el-menu-item-group>
@@ -85,10 +82,14 @@
 
 <script>
     import {mapState} from 'vuex'
-
+    import menuPath from "@/config/menuPath";
     export default {
         name: "NavMenu",
         props: {
+            level:{
+                type:Number,
+                default:2
+            },
             menuList: {
                 type: Array,
                 default: function () {
@@ -193,7 +194,47 @@
                 this.$emit('handleClose', key, keyPath)
             },
             select(index, path) {
-                this.$emit('select', index, path)
+                let selectMenu= {}
+                if(path.length===1){ //只有一级的
+                    selectMenu = this.menuList.filter((item, index) => {
+                        return JSON.stringify(item.Id) === path[0]
+                    })[0]
+                }
+                if(path.length===2){ //只有两级
+                    let selectFirstMenu = this.menuList.filter((item, index) => {
+                        return JSON.stringify(item.Id) === path[0]
+                    })[0]
+                    selectMenu = selectFirstMenu.Children.filter((item, index) => {
+                        return JSON.stringify(item.Id) === path[1]
+                    })[0]
+                }
+                if(path.length===3){ //只有三级
+                    let selectFirstMenu = this.menuList.filter((item, index) => {
+                        return JSON.stringify(item.Id) === path[0]
+                    })[0]
+                    let selectSecondMenu = selectFirstMenu.Children.filter((item, index) => {
+                        return JSON.stringify(item.Id) === path[1]
+                    })[0]
+                    selectMenu = selectSecondMenu.Children.filter((item, index) => {
+                        return JSON.stringify(item.Id) === path[2]
+                    })[0]
+                }
+                if(path.length===4){ //只有四级
+                    let selectFirstMenu = this.menuList.filter((item, index) => {
+                        return JSON.stringify(item.Id) === path[0]
+                    })[0]
+                    let selectSecondMenu = selectFirstMenu.Children.filter((item, index) => {
+                        return JSON.stringify(item.Id) === path[1]
+                    })[0]
+                    let selectThirdMenu = selectSecondMenu.Children.filter((item, index) => {
+                        return JSON.stringify(item.Id) === path[2]
+                    })[0]
+                    selectMenu = selectThirdMenu.Children.filter((item, index) => {
+                        return JSON.stringify(item.Id) === path[3]
+                    })[0]
+                }
+                let pagePath = menuPath[selectMenu.Id] //获取页面路径
+                this.$emit('select', index, path,pagePath,selectMenu)
             },
             ///测试修改主题色
             goset() {

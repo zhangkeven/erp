@@ -8,24 +8,21 @@
                 text-color="#333"
                 active-text-color="var(--first-color)">
             <el-menu-item index="1" class="NavSubTitle" disabled>
-                <template slot="title">人员管理</template>
+                <template slot="title">{{selectMenu.MenuName}}</template>
             </el-menu-item>
-            <el-submenu index="1">
-                <template slot="title">员工管理</template>
-                <div class="NavSub-SubMenu">
+            <div class="secondItem" v-for="(firstItem,firstIndex) in selectMenu.Children" :key="firstIndex">
+                <el-menu-item :index="JSON.stringify(firstItem.Id)" class="NavSubTitle" v-if="firstItem.Children.length === 0">
+                    <template slot="title">{{firstItem.MenuName}}</template>
+                </el-menu-item>
+                <el-submenu :index="JSON.stringify(firstItem.Id)" v-if="firstItem.Children.length > 0">
+                    <template slot="title">{{firstItem.MenuName}}</template>
+                    <div class="NavSub-SubMenu">
 
-                    <el-menu-item index="2-1">添加员工</el-menu-item>
-                    <el-menu-item index="2-2">员工列表</el-menu-item>
-                    <el-menu-item index="2-3">归档员工</el-menu-item>
-                </div>
+                        <el-menu-item v-for="(secondItem,secondIndex) in firstItem.Children" :key="secondIndex" :index="JSON.stringify(secondItem.Id)">{{secondItem.MenuName}}</el-menu-item>
+                    </div>
 
-            </el-submenu>
-            <el-submenu index="3">
-                <template slot="title">组织架构</template>
-                <el-menu-item index="3-1">添加部门</el-menu-item>
-                <el-menu-item index="3-2">部门列表</el-menu-item>
-            </el-submenu>
-<!--            <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>-->
+                </el-submenu>
+            </div>
         </el-menu>
 
     </div>
@@ -35,6 +32,12 @@
 <script>
     export default {
         name: "NavSubMenu",
+        props:{
+            selectMenu:{
+                type:Object,
+                default:{}
+            }
+        },
         data() {
             return {
                 activeIndex: '2-1',
@@ -51,6 +54,10 @@
 <style lang="scss">
     #NavSub-Menu{
         margin: 15px 0 10px;
+        .el-menu-demo{
+            display: flex;
+            flex-direction: row;
+        }
         .el-menu.el-menu--horizontal{
             background-color:#dfeae1 ;
         }

@@ -35,6 +35,5 @@ class CommonUtil{
 		document.getElementsByTagName('body')[0].style.setProperty('--first-color', firstColor) //css主题色
 		document.getElementsByTagName('body')[0].style.setProperty('--second-color', secondColor)
 	}
-
 }
 export default CommonUtil
